@@ -23,8 +23,16 @@ class SearchModel {
         Alamofire.request(categoriesRequestURL).responseJSON { response in
             
             if let JSON = response.result.value {
-                print("JSON: \(JSON)")
+//               print("JSON: \(JSON) ------------------------------------------------------------------------------")
+//                if let name = (JSON as AnyObject)["name"]! as? String {
+//                    userProfile.0 = name
+//                }
                 
+
+                
+                if let categories = (JSON as? NSDictionary){
+                    print(categories)
+                }
             }
         }
     }
