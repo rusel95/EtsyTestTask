@@ -13,7 +13,7 @@
 		847188E81EA8C6810030F9A8 /* EtsyTestTask.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 847188E61EA8C6810030F9A8 /* EtsyTestTask.xcdatamodeld */; };
 		847188EA1EA8C6810030F9A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 847188E91EA8C6810030F9A8 /* Assets.xcassets */; };
 		847188ED1EA8C6810030F9A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847188EB1EA8C6810030F9A8 /* LaunchScreen.storyboard */; };
-		84C3A25B1EA8FE6E004B1A62 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3A25A1EA8FE6E004B1A62 /* SearchModel.swift */; };
+		84C3A25B1EA8FE6E004B1A62 /* EtsyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3A25A1EA8FE6E004B1A62 /* EtsyModel.swift */; };
 		C0BDF421EA8C869DB6B3C8F7 /* Pods_EtsyTestTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813D4F093EB2163C7E9C5C7F /* Pods_EtsyTestTask.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		847188E91EA8C6810030F9A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		847188EC1EA8C6810030F9A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		847188EE1EA8C6810030F9A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84C3A25A1EA8FE6E004B1A62 /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		84C3A25A1EA8FE6E004B1A62 /* EtsyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EtsyModel.swift; sourceTree = "<group>"; };
 		F9B692BAE50807A09ECC414F /* Pods-EtsyTestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EtsyTestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-EtsyTestTask/Pods-EtsyTestTask.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +75,7 @@
 			children = (
 				847188DF1EA8C6810030F9A8 /* AppDelegate.swift */,
 				847188E11EA8C6810030F9A8 /* ViewController.swift */,
-				84C3A25A1EA8FE6E004B1A62 /* SearchModel.swift */,
+				84C3A25A1EA8FE6E004B1A62 /* EtsyModel.swift */,
 				847188E31EA8C6810030F9A8 /* Main.storyboard */,
 				847188E91EA8C6810030F9A8 /* Assets.xcassets */,
 				847188EB1EA8C6810030F9A8 /* LaunchScreen.storyboard */,
@@ -221,7 +221,7 @@
 				847188E21EA8C6810030F9A8 /* ViewController.swift in Sources */,
 				847188E81EA8C6810030F9A8 /* EtsyTestTask.xcdatamodeld in Sources */,
 				847188E01EA8C6810030F9A8 /* AppDelegate.swift in Sources */,
-				84C3A25B1EA8FE6E004B1A62 /* SearchModel.swift in Sources */,
+				84C3A25B1EA8FE6E004B1A62 /* EtsyModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
