@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class SearchModel {
     
@@ -17,22 +18,16 @@ class SearchModel {
     
     private let categoriesRequestURL = "https://openapi.etsy.com/v2/taxonomy/categories?api_key=l6pdqjuf7hdf97h1yvzadfce"
     
+    var categoriesArray = [String]()
     
     func getCategories() {
         
         Alamofire.request(categoriesRequestURL).responseJSON { response in
             
-            if let JSON = response.result.value {
-//               print("JSON: \(JSON) ------------------------------------------------------------------------------")
-//                if let name = (JSON as AnyObject)["name"]! as? String {
-//                    userProfile.0 = name
-//                }
-                
-
-                
-                if let categories = (JSON as? NSDictionary){
-                    print(categories)
-                }
+            let json = JSON(response.result.value!)
+            let categories = json["results"]
+            for categorie in categories {
+                print(categorie.1["long_name"])
             }
         }
     }
