@@ -19,6 +19,8 @@ class SearchResultsCollectionViewController: UICollectionViewController {
         static let numberOfItemsPerRow : CGFloat = 2.0
     }
     
+    var searchData : (String, String) = ("","")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +29,8 @@ class SearchResultsCollectionViewController: UICollectionViewController {
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+        print(searchData)
     }
     
     //MARK: UICollectionViewDataSource

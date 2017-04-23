@@ -18,6 +18,17 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var downloadingLabel: UILabel!
     @IBOutlet weak var chooseLabel: UILabel!
     
+    @IBAction func submitAction(_ sender: UIButton) {
+        let searchData : (String, String) = (searchTextField.text!, categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)])
+        self.performSegue(withIdentifier: "ShowSearchResults", sender: searchData)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowSearchResults" {
+            let showSearchResultsCVC = segue.destination as! SearchResultsCollectionViewController
+            showSearchResultsCVC.searchData = sender as! (String, String)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
