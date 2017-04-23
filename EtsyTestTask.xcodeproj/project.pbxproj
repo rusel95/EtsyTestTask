@@ -17,6 +17,8 @@
 		84E6DD621EACE59000964271 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD611EACE59000964271 /* DetailViewController.swift */; };
 		84E6DD641EACE81400964271 /* BookmarksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD631EACE81400964271 /* BookmarksCollectionViewController.swift */; };
 		84E6DD661EACE8CF00964271 /* SearchResultsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD651EACE8CF00964271 /* SearchResultsCollectionViewController.swift */; };
+		84E6DD681EACEF6100964271 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD671EACEF6100964271 /* ProductCollectionViewCell.swift */; };
+		84E6DD6A1EACF37B00964271 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD691EACF37B00964271 /* Product.swift */; };
 		C0BDF421EA8C869DB6B3C8F7 /* Pods_EtsyTestTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813D4F093EB2163C7E9C5C7F /* Pods_EtsyTestTask.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		84E6DD611EACE59000964271 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		84E6DD631EACE81400964271 /* BookmarksCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksCollectionViewController.swift; sourceTree = "<group>"; };
 		84E6DD651EACE8CF00964271 /* SearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCollectionViewController.swift; sourceTree = "<group>"; };
+		84E6DD671EACEF6100964271 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		84E6DD691EACF37B00964271 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		F9B692BAE50807A09ECC414F /* Pods-EtsyTestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EtsyTestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-EtsyTestTask/Pods-EtsyTestTask.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				84C3A25A1EA8FE6E004B1A62 /* EtsyModel.swift */,
+				84E6DD691EACF37B00964271 /* Product.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -72,6 +77,7 @@
 				847188E11EA8C6810030F9A8 /* SearchViewController.swift */,
 				84E6DD651EACE8CF00964271 /* SearchResultsCollectionViewController.swift */,
 				84E6DD631EACE81400964271 /* BookmarksCollectionViewController.swift */,
+				84E6DD611EACE59000964271 /* DetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -80,7 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				847188E31EA8C6810030F9A8 /* Main.storyboard */,
-				84E6DD611EACE59000964271 /* DetailViewController.swift */,
+				84E6DD671EACEF6100964271 /* ProductCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -253,6 +259,8 @@
 			files = (
 				84E6DD641EACE81400964271 /* BookmarksCollectionViewController.swift in Sources */,
 				847188E21EA8C6810030F9A8 /* SearchViewController.swift in Sources */,
+				84E6DD6A1EACF37B00964271 /* Product.swift in Sources */,
+				84E6DD681EACEF6100964271 /* ProductCollectionViewCell.swift in Sources */,
 				847188E81EA8C6810030F9A8 /* EtsyTestTask.xcdatamodeld in Sources */,
 				84E6DD621EACE59000964271 /* DetailViewController.swift in Sources */,
 				84E6DD661EACE8CF00964271 /* SearchResultsCollectionViewController.swift in Sources */,

@@ -10,21 +10,6 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-struct Product {
-    let name : String
-    let imageURL : String
-    let price : String
-    let description: String
-}
-
-struct Products {
-    
-    static var shared = Products()
-    private init() { }
-    
-    var array = [Product]()
-}
-
 class EtsyAPI {
     
     static let shared = EtsyAPI()
@@ -55,7 +40,7 @@ class EtsyAPI {
             let json = JSON(response.result.value!)
             let productList = json["results"]
             for product in productList {
-                Products.shared.array.append(Product(name: product.1["title"].string!,
+                ProductsContainer.shared.array.append(Product(name: product.1["title"].string!,
                                                      imageURL: product.1["url"].string!,
                                                      price: product.1["price"].string!,
                                                      description: product.1["description"].string!))
