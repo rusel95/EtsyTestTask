@@ -15,13 +15,14 @@ class EtsyAPI {
     static let shared = EtsyAPI()
     private init() { }
     
-    private let categoriesRequestURL = "https://openapi.etsy.com/v2/taxonomy/categories?api_key=l6pdqjuf7hdf97h1yvzadfce"
-    private var productsSearchRequestURL = "https://openapi.etsy.com/v2/listings/active?api_key=l6pdqjuf7hdf97h1yvzadfce"
-    private var imageDownloadURL = "https://openapi.etsy.com/v2/listings/"
+    private let apiKey = "?api_key=l6pdqjuf7hdf97h1yvzadfce"
+    private let categoriesRequestURL = "https://openapi.etsy.com/v2/taxonomy/categories"
+    private let productsSearchRequestURL = "https://openapi.etsy.com/v2/listings/active"
+    private let listingImagesURL = "https://openapi.etsy.com/v2/listings/"
     
     func getCategories(giveData: @escaping ([String]) -> () ) -> Void {
         
-        Alamofire.request(categoriesRequestURL).validate().responseJSON { response in
+        Alamofire.request(categoriesRequestURL + apiKey).validate().responseJSON { response in
             
             switch response.result {
             case .success:
@@ -33,18 +34,16 @@ class EtsyAPI {
                 }
                 giveData(categories)
             case .failure(let error):
-                print("")
-//                print(error)
+                print(error)
             }
         }
     }
     
     func getProducts(inCategory: String, giveData: @escaping () -> () ) -> Void {
         
-        productsSearchRequestURL += "&category=" + inCategory
-        productsSearchRequestURL += "&keywords=terminator"
+        let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=terminator"
         
-        Alamofire.request(productsSearchRequestURL).validate().responseJSON { response in
+        Alamofire.request(neededURL).validate().responseJSON { response in
             
             switch response.result {
             case .success:
@@ -74,7 +73,6 @@ class EtsyAPI {
                 giveData()
                 
             case .failure(let error):
-                print("")
                 print(error)
             }
         }
@@ -82,9 +80,9 @@ class EtsyAPI {
     
     func getImage(listingId: String/*, giveData: @escaping () -> ()*/) -> Void {
         
-        imageDownloadURL += listingId + "/images"
+        let currentImageURL = listingImagesURL + listingId + "/images" + apiKey
         
-        Alamofire.request(imageDownloadURL).validate().responseJSON { response in
+        Alamofire.request(currentImageURL).validate().responseJSON { response in
             
             switch response.result {
             case .success:
@@ -93,8 +91,7 @@ class EtsyAPI {
                 
                 //giveData(json)
             case .failure(let error):
-                print("")
-                print(error)
+                print("Error: ", error, "\nin: ", currentImageURL)
             }
         }
         
