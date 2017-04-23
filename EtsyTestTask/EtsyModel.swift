@@ -87,8 +87,9 @@ class EtsyAPI {
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
-                print(json)
-                
+                let results = json["results"].array!
+                let imageURL = results[0]["url_170x135"].string!
+                print(imageURL)
                 //giveData(json)
             case .failure(let error):
                 print("Error: ", error, "\nin: ", currentImageURL)
