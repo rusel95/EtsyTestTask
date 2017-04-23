@@ -52,6 +52,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		845E7AFC1EACDFA600B64750 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				84C3A25A1EA8FE6E004B1A62 /* EtsyModel.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		845E7AFD1EACDFBB00B64750 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				847188E11EA8C6810030F9A8 /* SearchViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		845E7AFE1EACDFE200B64750 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				847188E31EA8C6810030F9A8 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		847188D31EA8C6810030F9A8 = {
 			isa = PBXGroup;
 			children = (
@@ -74,9 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				847188DF1EA8C6810030F9A8 /* AppDelegate.swift */,
-				847188E11EA8C6810030F9A8 /* SearchViewController.swift */,
-				84C3A25A1EA8FE6E004B1A62 /* EtsyModel.swift */,
-				847188E31EA8C6810030F9A8 /* Main.storyboard */,
+				845E7AFC1EACDFA600B64750 /* Models */,
+				845E7AFE1EACDFE200B64750 /* Views */,
+				845E7AFD1EACDFBB00B64750 /* Controllers */,
 				847188E91EA8C6810030F9A8 /* Assets.xcassets */,
 				847188EB1EA8C6810030F9A8 /* LaunchScreen.storyboard */,
 				847188EE1EA8C6810030F9A8 /* Info.plist */,
