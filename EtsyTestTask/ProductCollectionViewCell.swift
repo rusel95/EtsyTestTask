@@ -19,18 +19,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     var info: Product! {
         didSet {
             nameLabel.text = info.name
-            Alamofire.request(info.imageURL).responseImage { response in
-                debugPrint(response)
-                
-                print(response.request)
-                print(response.response)
-                debugPrint(response.result)
-                
-                if let image = response.result.value {
-                    print("image downloaded: \(image)")
-                    self.photoImageView.image = image
-                }
-            }
+ 
+            EtsyAPI.shared.getImage(listingId: info.listingId)
 //            let imageCache = AutoPurgingImageCache()
 //            
 //            

@@ -9,10 +9,10 @@
 import Foundation
 
 struct Product {
-    let name : String
-    let imageURL : String
-    let price : String
-    let description: String
+    var name : String!
+    var listingId : String!
+    var price : String!
+    var description: String!
 }
 
 struct ProductsContainer {
