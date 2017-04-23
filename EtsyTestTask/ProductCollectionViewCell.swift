@@ -20,18 +20,10 @@ class ProductCollectionViewCell: UICollectionViewCell {
         didSet {
             nameLabel.text = info.name
  
-            EtsyAPI.shared.getImage(listingId: info.listingId)
-//            let imageCache = AutoPurgingImageCache()
-//            
-//            
-//            let urlRequest = URLRequest(url: URL(string: info.imageURL)!)
-//            let tempImage = UIImage(named: info.name)!.af_imageRoundedIntoCircle()
-//            
-//            // Add
-//            imageCache.add(tempImage, for: urlRequest, withIdentifier: info.name)
-//            
-//            // Fetch
-//            photoImageView.image = imageCache.image(for: urlRequest, withIdentifier: info.name)
+//            EtsyAPI.shared.getImage(listingId: info.listingId) { (image) in
+//                self.photoImageView.image = image
+//            }
+            
         }
     }
 }

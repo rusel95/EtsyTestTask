@@ -12,13 +12,13 @@ import SwiftyJSON
 
 class EtsyAPI {
     
-    static let shared = EtsyAPI()
+    static var shared = EtsyAPI()
     private init() { }
     
     private let apiKey = "?api_key=l6pdqjuf7hdf97h1yvzadfce"
     private let categoriesRequestURL = "https://openapi.etsy.com/v2/taxonomy/categories"
     private let productsSearchRequestURL = "https://openapi.etsy.com/v2/listings/active"
-    private let listingImagesURL = "https://openapi.etsy.com/v2/listings/"
+    private let listingImagesRequestURL = "https://openapi.etsy.com/v2/listings/"
     
     func getCategories(giveData: @escaping ([String]) -> () ) -> Void {
         
@@ -78,11 +78,24 @@ class EtsyAPI {
         }
     }
     
-    func getImage(listingId: String/*, giveData: @escaping () -> ()*/) -> Void {
+    func getImage(listingId: String, giveImage: @escaping (UIImage) -> () ) -> Void {
         
-        let currentImageURL = listingImagesURL + listingId + "/images" + apiKey
+        getImageURL(listingId: listingId) { (imageUrl) in
+            
+            Alamofire.request(imageUrl).validate().responseImage { response in
+                
+                if let image = response.result.value {
+                    giveImage(image)
+                }
+            }
+        }
+    }
+    
+    private func getImageURL(listingId: String, giveData: @escaping (String) -> () ) -> Void {
         
-        Alamofire.request(currentImageURL).validate().responseJSON { response in
+        let currentImageRequestURL = listingImagesRequestURL + listingId + "/images" + apiKey
+        
+        Alamofire.request(currentImageRequestURL).validate().responseJSON { response in
             
             switch response.result {
             case .success:
@@ -90,12 +103,12 @@ class EtsyAPI {
                 let results = json["results"].array!
                 let imageURL = results[0]["url_170x135"].string!
                 print(imageURL)
-                //giveData(json)
+                giveData(imageURL)
+                
             case .failure(let error):
-                print("Error: ", error, "\nin: ", currentImageURL)
+                print("Error: ", error, "\nin: ", currentImageRequestURL)
             }
         }
-        
         
     }
     
