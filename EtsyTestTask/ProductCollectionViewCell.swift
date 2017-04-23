@@ -13,12 +13,6 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var photoImageView : UIImageView!
     @IBOutlet weak var nameLabel : UILabel!
     
-    var imageName: String! {
-        didSet {
-            photoImageView.image = UIImage(named: imageName)
-        }
-    }
-    
     //MARK: Set cell with data
     var info: Product! {
         didSet {

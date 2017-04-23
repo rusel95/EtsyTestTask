@@ -249,8 +249,8 @@
                     </view>
                     <connections>
                         <outlet property="detailTextView" destination="VHE-bw-nIY" id="N57-Bu-2Ow"/>
-                        <outlet property="imageView" destination="5hI-kv-AR2" id="EYZ-08-lx7"/>
                         <outlet property="nameLabel" destination="gUy-Bf-s3c" id="gJd-Vc-eWI"/>
+                        <outlet property="photoImageView" destination="5hI-kv-AR2" id="Ylb-ob-sAJ"/>
                         <outlet property="priceLabel" destination="MBu-Sb-ANe" id="YA6-pU-s0q"/>
                     </connections>
                 </viewController>

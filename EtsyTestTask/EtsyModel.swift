@@ -16,25 +16,26 @@ class EtsyAPI {
     private init() { }
     
     private let categoriesRequestURL = "https://openapi.etsy.com/v2/taxonomy/categories?api_key=l6pdqjuf7hdf97h1yvzadfce"
-    private var productsSearchRequestURL = "https://openapi.etsy.com/v2/listings/active?api_key=l6pdqjuf7hdf97h1yvzadfce&category="
+    private var productsSearchRequestURL = "https://openapi.etsy.com/v2/listings/active?api_key=l6pdqjuf7hdf97h1yvzadfce"
     
-    var categoriesArray = [String]()
     
-    func getCategories() -> Void {
+    
+    
+    func getCategories(giveData: @escaping ([String]) -> () ) -> Void {
         
         Alamofire.request(categoriesRequestURL).responseJSON { response in
-            
+            var categories = [String]()
             let json = JSON(response.result.value!)
-            let categories = json["results"]
-            for categorie in categories {
-                self.categoriesArray.append(categorie.1["long_name"].string!)
-                //                print(categorie.1["long_name"])
+            let categoriesJSON = json["results"]
+            for categorie in categoriesJSON {
+                categories.append(categorie.1["long_name"].string!)
             }
+            giveData(categories)
         }
     }
     
     func getProducts(inCategory: String) {
-        productsSearchRequestURL += inCategory
+        productsSearchRequestURL += "&category=" + inCategory
         productsSearchRequestURL += "&keywords=terminator"
         Alamofire.request(productsSearchRequestURL).responseJSON { response in
             let json = JSON(response.result.value!)
@@ -47,5 +48,7 @@ class EtsyAPI {
             }
         }
     }
+    
+    
     
 }
