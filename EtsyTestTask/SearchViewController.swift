@@ -10,6 +10,10 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    @IBOutlet weak var productSearchBar: UISearchBar!
+    @IBOutlet weak var categoryPickerView: UIPickerView!
+    @IBOutlet weak var submitButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
