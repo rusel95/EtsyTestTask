@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class ProductCollectionViewCell: UICollectionViewCell {
     
@@ -17,8 +19,29 @@ class ProductCollectionViewCell: UICollectionViewCell {
     var info: Product! {
         didSet {
             nameLabel.text = info.name
-
-//            photoImageView.image = UIImage( //Download image (may be with Alamofire)
+            Alamofire.request(info.imageURL).responseImage { response in
+                debugPrint(response)
+                
+                print(response.request)
+                print(response.response)
+                debugPrint(response.result)
+                
+                if let image = response.result.value {
+                    print("image downloaded: \(image)")
+                    self.photoImageView.image = image
+                }
+            }
+//            let imageCache = AutoPurgingImageCache()
+//            
+//            
+//            let urlRequest = URLRequest(url: URL(string: info.imageURL)!)
+//            let tempImage = UIImage(named: info.name)!.af_imageRoundedIntoCircle()
+//            
+//            // Add
+//            imageCache.add(tempImage, for: urlRequest, withIdentifier: info.name)
+//            
+//            // Fetch
+//            photoImageView.image = imageCache.image(for: urlRequest, withIdentifier: info.name)
         }
     }
 }

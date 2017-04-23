@@ -34,7 +34,7 @@ class EtsyAPI {
         }
     }
     
-    func getProducts(inCategory: String) {
+    func getProducts(inCategory: String, giveData: @escaping () -> () ) -> Void {
         productsSearchRequestURL += "&category=" + inCategory
         productsSearchRequestURL += "&keywords=terminator"
         Alamofire.request(productsSearchRequestURL).responseJSON { response in
@@ -46,6 +46,7 @@ class EtsyAPI {
                                                      price: product.1["price"].string!,
                                                      description: product.1["description"].string!))
             }
+            giveData()
         }
     }
     

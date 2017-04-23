@@ -11,6 +11,8 @@ import UIKit
 
 class SearchResultsCollectionViewController: UICollectionViewController {
     
+    
+    
     struct Storyboard {
         static let productCell = "ProductCollectionViewCell"
         static let showDetailSegue = "ShowSearchDetail"
@@ -24,13 +26,21 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setFrames()
+        
+        EtsyAPI.shared.getProducts(inCategory: searchData.0) { 
+            self.collectionView?.reloadData()
+        }
+        
+    }
+    
+    private func setFrames() {
         let collectionViewWidth = collectionView?.frame.width
         let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
         
-        print(searchData)
     }
     
     //MARK: UICollectionViewDataSource
