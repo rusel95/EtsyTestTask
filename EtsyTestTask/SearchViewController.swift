@@ -12,9 +12,12 @@ var categoriesContainer = [String]()
 
 class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    @IBOutlet weak var productSearchBar: UISearchBar!
+    @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var categoryPickerView: UIPickerView!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var downloadingLabel: UILabel!
+    @IBOutlet weak var chooseLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +25,22 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         self.categoryPickerView.dataSource = self
         self.categoryPickerView.delegate = self
         
+        categoriesDownloading()
+    }
+    
+    private func categoriesDownloading() {
+        self.categoryPickerView.isHidden = true
+        self.submitButton.isHidden = true
+        self.chooseLabel.isHidden = true
+        
         EtsyAPI.shared.getCategories { categories in
             categoriesContainer = categories
+            self.categoryPickerView.isHidden = false
+            self.submitButton.isHidden = false
+            self.downloadingLabel.isHidden = true
+            self.chooseLabel.isHidden = false
             self.categoryPickerView.reloadAllComponents()
         }
-        
     }
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
