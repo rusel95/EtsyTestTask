@@ -23,30 +23,44 @@ class EtsyAPI {
     
     func getCategories(giveData: @escaping ([String]) -> () ) -> Void {
         
-        Alamofire.request(categoriesRequestURL).responseJSON { response in
-            var categories = [String]()
-            let json = JSON(response.result.value!)
-            let categoriesJSON = json["results"]
-            for categorie in categoriesJSON {
-                categories.append(categorie.1["long_name"].string!)
+        Alamofire.request(categoriesRequestURL).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                var categories = [String]()
+                let json = JSON(response.result.value!)
+                let categoriesJSON = json["results"]
+                for categorie in categoriesJSON {
+                    categories.append(categorie.1["long_name"].string!)
+                }
+                giveData(categories)
+            case .failure(let error):
+                print(error)
             }
-            giveData(categories)
         }
     }
     
     func getProducts(inCategory: String, giveData: @escaping () -> () ) -> Void {
+        
         productsSearchRequestURL += "&category=" + inCategory
         productsSearchRequestURL += "&keywords=terminator"
-        Alamofire.request(productsSearchRequestURL).responseJSON { response in
-            let json = JSON(response.result.value!)
-            let productList = json["results"]
-            for product in productList {
-                ProductsContainer.shared.array.append(Product(name: product.1["title"].string!,
-                                                     imageURL: product.1["url"].string!,
-                                                     price: product.1["price"].string!,
-                                                     description: product.1["description"].string!))
+        
+        Alamofire.request(productsSearchRequestURL).validate().responseJSON { response in
+            
+            switch response.result {
+            case .success:
+                let json = JSON(response.result.value!)
+                let productList = json["results"]
+                for product in productList {
+                    ProductsContainer.shared.array.append(Product(name: product.1["title"].string!,
+                                                                  imageURL: product.1["url"].string!,
+                                                                  price: product.1["price"].string!,
+                                                                  description: product.1["description"].string!))
+                }
+                giveData()
+            case .failure(let error):
+                print(error)
             }
-            giveData()
         }
     }
     

@@ -200,7 +200,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XR9-J4-mtq">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-img" translatesAutoresizingMaskIntoConstraints="NO" id="XR9-J4-mtq">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLR-WS-lwn">
@@ -261,7 +261,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5hI-kv-AR2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-img" translatesAutoresizingMaskIntoConstraints="NO" id="5hI-kv-AR2">
                                 <rect key="frame" x="16" y="112" width="288" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5hI-kv-AR2" secondAttribute="height" multiplier="16:9" id="zxA-XB-zmx"/>
@@ -343,7 +343,10 @@
             <point key="canvasLocation" x="-1502" y="-97"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="no-img" width="300" height="300"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0Bg-bU-iG2"/>
+        <segue reference="NmJ-SE-NIP"/>
     </inferredMetricsTieBreakers>
 </document>
