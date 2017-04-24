@@ -50,7 +50,7 @@ class EtsyAPI {
             case .success:
                 let json = JSON(response.result.value!)
                 let productList = json["results"]
- 
+                
                 for product in productList {
                     
                     var tempProduct = Product()
@@ -81,23 +81,26 @@ class EtsyAPI {
     
     func getImage(listingId: String, giveImage: @escaping (UIImage) -> () ) -> Void {
         
-        let imageCache = AutoPurgingImageCache()
-        
-        
-        getImageURL(listingId: listingId) { (realImageURL) in
+        if let image = ProductsContainer.shared.imageCache.image(withIdentifier: listingId) {
+            giveImage( image )
+        } else {
             
-            Alamofire.request(realImageURL).validate().responseImage { response in
+            getImageURL(listingId: listingId) { (realImageURL) in
                 
-                if let realImage = response.result.value {
-                    // Add to Alamofire cache
-                    imageCache.add(realImage, for: URLRequest(url: URL(string: realImageURL)! ), withIdentifier: listingId)
+                Alamofire.request(realImageURL).validate().responseImage { response in
                     
-                    //Fetch From Alamofire and get
-                    giveImage( imageCache.image(for: URLRequest(url: URL(string: realImageURL)! ), withIdentifier: listingId)! )
+                    if let realImage = response.result.value {
+                        // Add to Alamofire cache
+                        ProductsContainer.shared.imageCache.add(realImage, withIdentifier: listingId)
+                        
+                        //Fetch From Alamofire cache and give data
+                        giveImage( realImage )
+                    }
                 }
             }
         }
     }
+    
     
     func getImageURL(listingId: String, giveData: @escaping (String) -> () ) -> Void {
         
@@ -117,5 +120,5 @@ class EtsyAPI {
             }
         }
     }
-
+    
 }

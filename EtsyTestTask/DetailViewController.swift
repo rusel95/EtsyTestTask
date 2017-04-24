@@ -24,7 +24,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         
         nameLabel.text = info.name
-        
+        photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
         priceLabel.text = info.price
         detailTextView.text = info.description
         

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AlamofireImage
 
 struct Product {
     var name : String!
@@ -21,4 +22,5 @@ struct ProductsContainer {
     private init() { }
     
     var array = [Product]()
+    let imageCache = AutoPurgingImageCache()
 }
