@@ -19,7 +19,7 @@ class DetailViewController: UIViewController {
     //MARK: Save to CoreData
     @IBAction func actionButton(_ sender: UIButton) {
 
-        let product: CoreProduct = NSEntityDescription.insertNewObject(forEntityName: "CoreProduct", into: DatabaseController.getContext()) as! CoreProduct
+        let product: CoreProducts = NSEntityDescription.insertNewObject(forEntityName: "CoreProducts", into: DatabaseController.getContext()) as! CoreProducts
         
         product.name = info.name
         product.image = UIImagePNGRepresentation( ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)! )! as NSData
@@ -28,7 +28,7 @@ class DetailViewController: UIViewController {
         
         DatabaseController.saveContext()
         
-        let fetchRequest: NSFetchRequest<CoreProduct> = CoreProduct.fetchRequest()
+        let fetchRequest: NSFetchRequest<CoreProducts> = CoreProducts.fetchRequest()
         
         do {
             
@@ -36,7 +36,7 @@ class DetailViewController: UIViewController {
             
             print("number of results:", searchResults.count)
             
-            for result in searchResults as [CoreProduct] {
+            for result in searchResults as [CoreProducts] {
                 print("\n\(result.name!) \n\(result.price!)")
             }
             
@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
             print("Error while fetching:", error)
         }
         
-        DatabaseController.getContext().delete(product)
+        //DatabaseController.getContext().delete(product)
     }
     
     var info = Product()
