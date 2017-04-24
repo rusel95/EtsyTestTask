@@ -19,6 +19,10 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var chooseLabel: UILabel!
     
     @IBAction func submitAction(_ sender: UIButton) {
+        
+        ProductsContainer.shared.array.removeAll()
+        ProductsContainer.shared.imageCache.removeAllImages()
+        
         let searchData : (String, String) = (searchTextField.text!, categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)])
         self.performSegue(withIdentifier: "ShowSearchResults", sender: searchData)
     }

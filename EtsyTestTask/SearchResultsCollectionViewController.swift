@@ -17,8 +17,8 @@ class SearchResultsCollectionViewController: UICollectionViewController {
         static let productCell = "ProductCollectionViewCell"
         static let showDetailSegue = "ShowSearchDetail"
         
-        static let leftAndRightPaddings : CGFloat = 2.0
-        static let numberOfItemsPerRow : CGFloat = 2.0
+        static let leftAndRightPaddings : CGFloat = 20.0
+        static let numberOfItemsPerRow : CGFloat = 3.0
     }
     
     var searchData : (String, String) = ("","")
@@ -57,13 +57,13 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: Storyboard.showDetailSegue, sender: ProductsContainer.shared.array[indexPath.item].name)
+        self.performSegue(withIdentifier: Storyboard.showDetailSegue, sender: ProductsContainer.shared.array[indexPath.item])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Storyboard.showDetailSegue {
             let detailVC = segue.destination as! DetailViewController
-            detailVC.name = sender as! String
+            detailVC.info = sender as! Product
         }
     }
     

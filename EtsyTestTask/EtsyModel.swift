@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 import SwiftyJSON
 
 class EtsyAPI {
@@ -49,7 +50,7 @@ class EtsyAPI {
             case .success:
                 let json = JSON(response.result.value!)
                 let productList = json["results"]
- 
+                
                 for product in productList {
                     
                     var tempProduct = Product()
@@ -63,7 +64,7 @@ class EtsyAPI {
                         print("\n\nerror whyle getting listing_id from json\n\n")
                     }
                     if let price = product.1["price"].string {
-                        tempProduct.price = price
+                        tempProduct.price = price + " $"
                     }
                     if let descriprion = product.1["description"].string {
                         tempProduct.description = descriprion
@@ -80,18 +81,28 @@ class EtsyAPI {
     
     func getImage(listingId: String, giveImage: @escaping (UIImage) -> () ) -> Void {
         
-        getImageURL(listingId: listingId) { (imageUrl) in
+        if let image = ProductsContainer.shared.imageCache.image(withIdentifier: listingId) {
+            giveImage( image )
+        } else {
             
-            Alamofire.request(imageUrl).validate().responseImage { response in
+            getImageURL(listingId: listingId) { (realImageURL) in
                 
-                if let image = response.result.value {
-                    giveImage(image)
+                Alamofire.request(realImageURL).validate().responseImage { response in
+                    
+                    if let realImage = response.result.value {
+                        // Add to Alamofire cache
+                        ProductsContainer.shared.imageCache.add(realImage, withIdentifier: listingId)
+                        
+                        //Fetch From Alamofire cache and give data
+                        giveImage( realImage )
+                    }
                 }
             }
         }
     }
     
-    private func getImageURL(listingId: String, giveData: @escaping (String) -> () ) -> Void {
+    
+    func getImageURL(listingId: String, giveData: @escaping (String) -> () ) -> Void {
         
         let currentImageRequestURL = listingImagesRequestURL + listingId + "/images" + apiKey
         
@@ -102,16 +113,12 @@ class EtsyAPI {
                 let json = JSON(response.result.value!)
                 let results = json["results"].array!
                 let imageURL = results[0]["url_170x135"].string!
-                print(imageURL)
                 giveData(imageURL)
                 
             case .failure(let error):
                 print("Error: ", error, "\nin: ", currentImageRequestURL)
             }
         }
-        
     }
-    
-    
     
 }
