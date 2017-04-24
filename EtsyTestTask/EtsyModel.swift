@@ -64,7 +64,7 @@ class EtsyAPI {
                         print("\n\nerror whyle getting listing_id from json\n\n")
                     }
                     if let price = product.1["price"].string {
-                        tempProduct.price = price
+                        tempProduct.price = price + " $"
                     }
                     if let descriprion = product.1["description"].string {
                         tempProduct.description = descriprion
