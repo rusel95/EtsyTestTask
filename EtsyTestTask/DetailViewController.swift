@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController {
     
@@ -15,7 +16,35 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailTextView: UITextView!
     
+    //MARK: Save to CoreData
     @IBAction func actionButton(_ sender: UIButton) {
+
+        let product: CoreProduct = NSEntityDescription.insertNewObject(forEntityName: "CoreProduct", into: DatabaseController.getContext()) as! CoreProduct
+        
+        product.name = info.name
+        product.image = UIImagePNGRepresentation( ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)! )! as NSData
+        product.price = info.price
+        product.descript = info.description
+        
+        DatabaseController.saveContext()
+        
+        let fetchRequest: NSFetchRequest<CoreProduct> = CoreProduct.fetchRequest()
+        
+        do {
+            
+            let searchResults = try DatabaseController.getContext().fetch(fetchRequest)
+            
+            print("number of results:", searchResults.count)
+            
+            for result in searchResults as [CoreProduct] {
+                print("\n\(result.name!) \n\(result.price!)")
+            }
+            
+        } catch {
+            print("Error while fetching:", error)
+        }
+        
+        DatabaseController.getContext().delete(product)
     }
     
     var info = Product()
@@ -23,11 +52,14 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setView()
+    }
+    
+    private func setView() {
         nameLabel.text = info.name
         photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
         priceLabel.text = info.price
         detailTextView.text = info.description
-        
     }
     
 }
