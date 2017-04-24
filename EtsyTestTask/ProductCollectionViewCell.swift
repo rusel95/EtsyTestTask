@@ -24,6 +24,10 @@ class ProductCollectionViewCell: UICollectionViewCell {
 //                self.photoImageView.image = image
 //            }
             
+            EtsyAPI.shared.getImageURL(listingId: info.listingId) { (url) in
+                self.photoImageView.af_setImage(withURL: URL(string: url)!)
+            }
+            
         }
     }
 }

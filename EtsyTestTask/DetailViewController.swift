@@ -18,14 +18,16 @@ class DetailViewController: UIViewController {
     @IBAction func actionButton(_ sender: UIButton) {
     }
     
-    var name : String!
-    //photoImageView.image =
-//    var price : String!
-//    var detail : String!
+    var info = Product()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = name
+        
+        nameLabel.text = info.name
+        
+        priceLabel.text = info.price
+        detailTextView.text = info.description
+        
     }
     
 }

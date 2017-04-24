@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 import SwiftyJSON
 
 class EtsyAPI {
@@ -80,18 +81,25 @@ class EtsyAPI {
     
     func getImage(listingId: String, giveImage: @escaping (UIImage) -> () ) -> Void {
         
-        getImageURL(listingId: listingId) { (imageUrl) in
+        let imageCache = AutoPurgingImageCache()
+        
+        
+        getImageURL(listingId: listingId) { (realImageURL) in
             
-            Alamofire.request(imageUrl).validate().responseImage { response in
+            Alamofire.request(realImageURL).validate().responseImage { response in
                 
-                if let image = response.result.value {
-                    giveImage(image)
+                if let realImage = response.result.value {
+                    // Add to Alamofire cache
+                    imageCache.add(realImage, for: URLRequest(url: URL(string: realImageURL)! ), withIdentifier: listingId)
+                    
+                    //Fetch From Alamofire and get
+                    giveImage( imageCache.image(for: URLRequest(url: URL(string: realImageURL)! ), withIdentifier: listingId)! )
                 }
             }
         }
     }
     
-    private func getImageURL(listingId: String, giveData: @escaping (String) -> () ) -> Void {
+    func getImageURL(listingId: String, giveData: @escaping (String) -> () ) -> Void {
         
         let currentImageRequestURL = listingImagesRequestURL + listingId + "/images" + apiKey
         
@@ -102,16 +110,12 @@ class EtsyAPI {
                 let json = JSON(response.result.value!)
                 let results = json["results"].array!
                 let imageURL = results[0]["url_170x135"].string!
-                print(imageURL)
                 giveData(imageURL)
                 
             case .failure(let error):
                 print("Error: ", error, "\nin: ", currentImageRequestURL)
             }
         }
-        
     }
-    
-    
-    
+
 }
