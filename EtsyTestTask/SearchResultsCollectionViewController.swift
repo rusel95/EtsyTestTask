@@ -17,8 +17,8 @@ class SearchResultsCollectionViewController: UICollectionViewController {
         static let productCell = "ProductCollectionViewCell"
         static let showDetailSegue = "ShowSearchDetail"
         
-        static let leftAndRightPaddings : CGFloat = 2.0
-        static let numberOfItemsPerRow : CGFloat = 2.0
+        static let leftAndRightPaddings : CGFloat = 20.0
+        static let numberOfItemsPerRow : CGFloat = 3.0
     }
     
     var searchData : (String, String) = ("","")
