@@ -21,6 +21,7 @@
                         <color key="barTintColor" red="1" green="0.99215686270000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
+                            <color key="textColor" red="0.2666666667" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
@@ -31,7 +32,7 @@
             </objects>
             <point key="canvasLocation" x="-684" y="256"/>
         </scene>
-        <!--Bookmarks Collection View Controller-->
+        <!--your bookmarks-->
         <scene sceneID="hjH-If-acH">
             <objects>
                 <collectionViewController id="BNP-yg-uai" customClass="BookmarksCollectionViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -87,7 +88,7 @@
                         </connections>
                     </collectionView>
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="TUp-6V-RcP"/>
-                    <navigationItem key="navigationItem" id="4uU-3U-ZEl"/>
+                    <navigationItem key="navigationItem" title="your bookmarks" id="4uU-3U-ZEl"/>
                     <connections>
                         <segue destination="CbF-Dn-gGl" kind="show" identifier="ShowBookmarksDetail" id="0Bg-bU-iG2"/>
                     </connections>
@@ -119,7 +120,7 @@
             </objects>
             <point key="canvasLocation" x="-684" y="-428"/>
         </scene>
-        <!--Search View Controller-->
+        <!--find the best for you!-->
         <scene sceneID="xRg-fj-26O">
             <objects>
                 <viewController id="UDU-VE-tt4" customClass="SearchViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -132,7 +133,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPx-YX-WSb">
-                                <rect key="frame" x="16" y="402" width="288" height="53"/>
+                                <rect key="frame" x="16" y="434" width="288" height="53"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.55912341099999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="30"/>
                                 <state key="normal" title="Submit">
@@ -168,7 +169,7 @@
                         <constraints>
                             <constraint firstItem="kLE-4S-KTN" firstAttribute="top" secondItem="Z7w-cB-Bnb" secondAttribute="bottom" constant="24" id="1qi-Id-2Yy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kFc-vp-bps" secondAttribute="trailing" id="6rA-6w-Pom"/>
-                            <constraint firstItem="6zU-sU-T6A" firstAttribute="top" secondItem="WPx-YX-WSb" secondAttribute="bottom" constant="64" id="FSK-kh-LiQ"/>
+                            <constraint firstItem="6zU-sU-T6A" firstAttribute="top" secondItem="WPx-YX-WSb" secondAttribute="bottom" constant="32" id="FSK-kh-LiQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kLE-4S-KTN" secondAttribute="trailing" id="LcO-hy-asm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WPx-YX-WSb" secondAttribute="trailing" id="Qpm-vp-xfU"/>
                             <constraint firstItem="Uz3-Eg-8hf" firstAttribute="top" secondItem="5KP-27-eUu" secondAttribute="bottom" id="TGz-DW-9CF"/>
@@ -184,7 +185,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="xQJ-oA-rBM"/>
-                    <navigationItem key="navigationItem" id="ugK-Z4-1xz"/>
+                    <navigationItem key="navigationItem" title="find the best for you!" id="ugK-Z4-1xz"/>
                     <connections>
                         <outlet property="categoryPickerView" destination="Uz3-Eg-8hf" id="tVI-EB-8MJ"/>
                         <outlet property="chooseLabel" destination="kFc-vp-bps" id="muZ-k0-h7s"/>
@@ -207,7 +208,7 @@
             </objects>
             <point key="canvasLocation" x="36" y="-429"/>
         </scene>
-        <!--Your results-->
+        <!--search results-->
         <scene sceneID="YXC-tX-CVb">
             <objects>
                 <collectionViewController id="cH2-Bt-0AE" customClass="SearchResultsCollectionViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -263,7 +264,7 @@
                             <outlet property="delegate" destination="cH2-Bt-0AE" id="OLp-Vq-SOk"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Your results" id="M9e-kP-CyX"/>
+                    <navigationItem key="navigationItem" title="search results" id="M9e-kP-CyX"/>
                     <connections>
                         <segue destination="CbF-Dn-gGl" kind="show" identifier="ShowSearchDetail" id="NmJ-SE-NIP"/>
                     </connections>
@@ -272,7 +273,7 @@
             </objects>
             <point key="canvasLocation" x="784" y="-430"/>
         </scene>
-        <!--Details-->
+        <!--details-->
         <scene sceneID="N5a-x1-l1r">
             <objects>
                 <viewController id="CbF-Dn-gGl" customClass="DetailViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -296,16 +297,6 @@
                                     <constraint firstAttribute="height" constant="180" id="gsK-4x-Pwz"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muy-9Y-s6V">
-                                <rect key="frame" x="16" y="471" width="288" height="36"/>
-                                <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
-                                <color key="tintColor" red="0.2666666667" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Save/Delete to Bookmarks"/>
-                                <connections>
-                                    <action selector="actionButton:" destination="CbF-Dn-gGl" eventType="touchUpInside" id="X25-ts-y8u"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHE-bw-nIY">
                                 <rect key="frame" x="16" y="294" width="288" height="165"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -319,6 +310,16 @@
                                 <color key="textColor" red="0.2666666667" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="muy-9Y-s6V">
+                                <rect key="frame" x="16" y="471" width="288" height="36"/>
+                                <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                <color key="tintColor" red="0.2666666667" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Save/Delete to Bookmarks"/>
+                                <connections>
+                                    <action selector="actionButton:" destination="CbF-Dn-gGl" eventType="touchUpInside" id="X25-ts-y8u"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -340,8 +341,9 @@
                             <constraint firstItem="gUy-Bf-s3c" firstAttribute="top" secondItem="gBU-fz-YTe" secondAttribute="bottom" constant="12" id="vHc-UL-rrf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Details" id="vo1-Ct-Zzd"/>
+                    <navigationItem key="navigationItem" title="details" id="vo1-Ct-Zzd"/>
                     <connections>
+                        <outlet property="actionOutlet" destination="muy-9Y-s6V" id="bic-AI-JD5"/>
                         <outlet property="detailTextView" destination="VHE-bw-nIY" id="N57-Bu-2Ow"/>
                         <outlet property="nameLabel" destination="gUy-Bf-s3c" id="gJd-Vc-eWI"/>
                         <outlet property="photoImageView" destination="5hI-kv-AR2" id="Ylb-ob-sAJ"/>

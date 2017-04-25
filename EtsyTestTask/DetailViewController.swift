@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailTextView: UITextView!
     
-    //MARK: Save to CoreData
+    @IBOutlet weak var actionOutlet: UIButton!
     @IBAction func actionButton(_ sender: UIButton) {
         if info != nil {
             DatabaseModel.shared.saveProduct(with: info)
@@ -25,12 +25,16 @@ class DetailViewController: UIViewController {
         }
     }
     
+    //need to find out who is controller`s parent
     var info : Product!
     var coreInfo : DatabaseProduct!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setView()
     }
     
@@ -40,11 +44,13 @@ class DetailViewController: UIViewController {
             photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
             priceLabel.text = info.price
             detailTextView.text = info.description
+            actionOutlet.titleLabel?.text = "Save to bookmarks"
         } else {
             nameLabel.text = coreInfo.name
             photoImageView.image = coreInfo.image
             priceLabel.text = coreInfo.price
             detailTextView.text = coreInfo.description
+            actionOutlet.titleLabel?.text = "Delete from bookmarks"
         }
     }
     
