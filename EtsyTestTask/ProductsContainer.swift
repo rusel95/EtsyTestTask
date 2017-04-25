@@ -16,11 +16,19 @@ struct Product {
     var description: String!
 }
 
+struct DatabaseProduct {
+    var name : String!
+    var image : UIImage!
+    var price : String!
+    var description: String!
+}
+
 struct ProductsContainer {
     
     static var shared = ProductsContainer()
     private init() { }
     
-    var array = [Product]()
+    var foundProducts = [Product]()
+    var databaseProducts = [DatabaseProduct]()
     let imageCache = AutoPurgingImageCache()
 }

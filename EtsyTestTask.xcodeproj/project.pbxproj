@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8413951A1EAE56BF00DB9ED4 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841395191EAE56BF00DB9ED4 /* DatabaseController.swift */; };
+		8447F4991EAE77610094D836 /* DatabaseCRUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447F4981EAE77610094D836 /* DatabaseCRUD.swift */; };
 		847188E01EA8C6810030F9A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847188DF1EA8C6810030F9A8 /* AppDelegate.swift */; };
 		847188E21EA8C6810030F9A8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847188E11EA8C6810030F9A8 /* SearchViewController.swift */; };
 		847188E51EA8C6810030F9A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847188E31EA8C6810030F9A8 /* Main.storyboard */; };
@@ -19,7 +20,7 @@
 		84E6DD641EACE81400964271 /* BookmarksCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD631EACE81400964271 /* BookmarksCollectionViewController.swift */; };
 		84E6DD661EACE8CF00964271 /* SearchResultsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD651EACE8CF00964271 /* SearchResultsCollectionViewController.swift */; };
 		84E6DD681EACEF6100964271 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD671EACEF6100964271 /* ProductCollectionViewCell.swift */; };
-		84E6DD6A1EACF37B00964271 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD691EACF37B00964271 /* Product.swift */; };
+		84E6DD6A1EACF37B00964271 /* ProductsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6DD691EACF37B00964271 /* ProductsContainer.swift */; };
 		C0BDF421EA8C869DB6B3C8F7 /* Pods_EtsyTestTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 813D4F093EB2163C7E9C5C7F /* Pods_EtsyTestTask.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		4AE73ADB2B397AE91304D66A /* Pods-EtsyTestTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EtsyTestTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EtsyTestTask/Pods-EtsyTestTask.debug.xcconfig"; sourceTree = "<group>"; };
 		813D4F093EB2163C7E9C5C7F /* Pods_EtsyTestTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EtsyTestTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841395191EAE56BF00DB9ED4 /* DatabaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
+		8447F4981EAE77610094D836 /* DatabaseCRUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseCRUD.swift; sourceTree = "<group>"; };
 		847188DC1EA8C6810030F9A8 /* EtsyTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtsyTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		847188DF1EA8C6810030F9A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		847188E11EA8C6810030F9A8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +42,7 @@
 		84E6DD631EACE81400964271 /* BookmarksCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookmarksCollectionViewController.swift; sourceTree = "<group>"; };
 		84E6DD651EACE8CF00964271 /* SearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsCollectionViewController.swift; sourceTree = "<group>"; };
 		84E6DD671EACEF6100964271 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
-		84E6DD691EACF37B00964271 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		84E6DD691EACF37B00964271 /* ProductsContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsContainer.swift; sourceTree = "<group>"; };
 		F9B692BAE50807A09ECC414F /* Pods-EtsyTestTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EtsyTestTask.release.xcconfig"; path = "Pods/Target Support Files/Pods-EtsyTestTask/Pods-EtsyTestTask.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,9 +81,10 @@
 			isa = PBXGroup;
 			children = (
 				84C3A25A1EA8FE6E004B1A62 /* EtsyModel.swift */,
-				84E6DD691EACF37B00964271 /* Product.swift */,
+				84E6DD691EACF37B00964271 /* ProductsContainer.swift */,
 				847188E61EA8C6810030F9A8 /* EtsyTestTask.xcdatamodeld */,
 				841395191EAE56BF00DB9ED4 /* DatabaseController.swift */,
+				8447F4981EAE77610094D836 /* DatabaseCRUD.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -270,13 +273,14 @@
 			files = (
 				84E6DD641EACE81400964271 /* BookmarksCollectionViewController.swift in Sources */,
 				847188E21EA8C6810030F9A8 /* SearchViewController.swift in Sources */,
-				84E6DD6A1EACF37B00964271 /* Product.swift in Sources */,
+				84E6DD6A1EACF37B00964271 /* ProductsContainer.swift in Sources */,
 				84E6DD681EACEF6100964271 /* ProductCollectionViewCell.swift in Sources */,
 				847188E81EA8C6810030F9A8 /* EtsyTestTask.xcdatamodeld in Sources */,
 				8413951A1EAE56BF00DB9ED4 /* DatabaseController.swift in Sources */,
 				84E6DD621EACE59000964271 /* DetailViewController.swift in Sources */,
 				84E6DD661EACE8CF00964271 /* SearchResultsCollectionViewController.swift in Sources */,
 				847188E01EA8C6810030F9A8 /* AppDelegate.swift in Sources */,
+				8447F4991EAE77610094D836 /* DatabaseCRUD.swift in Sources */,
 				84C3A25B1EA8FE6E004B1A62 /* EtsyModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

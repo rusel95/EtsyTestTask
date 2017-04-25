@@ -19,15 +19,17 @@ class ProductCollectionViewCell: UICollectionViewCell {
     var info: Product! {
         didSet {
             nameLabel.text = info.name
- 
-//            EtsyAPI.shared.getImage(listingId: info.listingId) { (image) in
-//                self.photoImageView.image = image
-//            }
-            
             EtsyAPI.shared.getImage(listingId: info.listingId) { (image) in
                 self.photoImageView.image = image
             }
             
+        }
+    }
+    
+    var coreInfo: DatabaseProduct! {
+        didSet {
+            nameLabel.text = coreInfo.name
+            photoImageView.image = coreInfo.image
         }
     }
 }

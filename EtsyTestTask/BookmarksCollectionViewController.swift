@@ -9,7 +9,7 @@
 import UIKit
 
 class BookmarksCollectionViewController: UICollectionViewController {
-
+    
     struct Storyboard {
         static let productCell = "ProductCollectionViewCell"
         static let showDetailSegue = "ShowBookmarksDetail"
@@ -23,6 +23,7 @@ class BookmarksCollectionViewController: UICollectionViewController {
         
         setFrames()
     
+        ProductsContainer.shared.databaseProducts = DatabaseCRUD.shared.getCoreProducts()
     }
     
     private func setFrames() {
@@ -31,30 +32,29 @@ class BookmarksCollectionViewController: UICollectionViewController {
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-        
     }
     
     //MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ProductsContainer.shared.array.count
+        return ProductsContainer.shared.databaseProducts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let product = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.productCell, for: indexPath) as! ProductCollectionViewCell
         
-        product.info = ProductsContainer.shared.array[indexPath.item]
+        //product.coreInfo = ProductsContainer.shared.databaseProducts[indexPath.item]
         
         return product
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: Storyboard.showDetailSegue, sender: ProductsContainer.shared.array[indexPath.item])
+        self.performSegue(withIdentifier: Storyboard.showDetailSegue, sender: ProductsContainer.shared.databaseProducts[indexPath.item] )
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Storyboard.showDetailSegue {
             let detailVC = segue.destination as! DetailViewController
-            detailVC.info = sender as! Product
+            detailVC.coreInfo = sender as! DatabaseProduct
         }
     }
 

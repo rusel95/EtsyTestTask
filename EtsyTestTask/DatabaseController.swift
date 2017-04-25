@@ -1,21 +1,10 @@
 //
-//  CoreDataStack.swift
-//  EtsyTestTask
-//
-//  Created by Admin on 24.04.17.
-//  Copyright © 2017 rusel95. All rights reserved.
-//
-
-import Foundation
-
-//
 //  DatabaseController.swift
 //  CoreData Snippet
 //
 //  Copyright © 2017 rusel95. All rights reserved.
 //
-
-import Foundation
+import UIKit
 import CoreData
 
 class DatabaseController {
@@ -26,8 +15,7 @@ class DatabaseController {
         return DatabaseController.persistentContainer.viewContext
     }
     
-    // MARK: - Core Data stack
-    
+    //MARK: - Core Data stack
     static var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -55,8 +43,7 @@ class DatabaseController {
         return container
     }()
     
-    // MARK: - Core Data Saving support
-    
+    //MARK: - Core Data Saving support
     class func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -71,4 +58,5 @@ class DatabaseController {
         }
     }
     
+        
 }

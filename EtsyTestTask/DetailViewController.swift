@@ -18,36 +18,11 @@ class DetailViewController: UIViewController {
     
     //MARK: Save to CoreData
     @IBAction func actionButton(_ sender: UIButton) {
-
-        let product: CoreProducts = NSEntityDescription.insertNewObject(forEntityName: "CoreProducts", into: DatabaseController.getContext()) as! CoreProducts
-        
-        product.name = info.name
-        product.image = UIImagePNGRepresentation( ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)! )! as NSData
-        product.price = info.price
-        product.descript = info.description
-        
-        DatabaseController.saveContext()
-        
-        let fetchRequest: NSFetchRequest<CoreProducts> = CoreProducts.fetchRequest()
-        
-        do {
-            
-            let searchResults = try DatabaseController.getContext().fetch(fetchRequest)
-            
-            print("number of results:", searchResults.count)
-            
-            for result in searchResults as [CoreProducts] {
-                print("\n\(result.name!) \n\(result.price!)")
-            }
-            
-        } catch {
-            print("Error while fetching:", error)
-        }
-        
-        //DatabaseController.getContext().delete(product)
+        DatabaseCRUD.shared.saveProduct(with: info)
     }
     
-    var info = Product()
+    var info : Product!
+    var coreInfo : DatabaseProduct!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +31,17 @@ class DetailViewController: UIViewController {
     }
     
     private func setView() {
-        nameLabel.text = info.name
-        photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
-        priceLabel.text = info.price
-        detailTextView.text = info.description
+        if info != nil {
+            nameLabel.text = info.name
+            photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
+            priceLabel.text = info.price
+            detailTextView.text = info.description
+        } else {
+            nameLabel.text = coreInfo.name
+            photoImageView.image = coreInfo.image
+            priceLabel.text = coreInfo.price
+            detailTextView.text = coreInfo.description
+        }
     }
     
 }

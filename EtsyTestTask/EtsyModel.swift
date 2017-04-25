@@ -69,7 +69,7 @@ class EtsyAPI {
                     if let descriprion = product.1["description"].string {
                         tempProduct.description = descriprion
                     }
-                    ProductsContainer.shared.array.append(tempProduct)
+                    ProductsContainer.shared.foundProducts.append(tempProduct)
                 }
                 giveData()
                 
