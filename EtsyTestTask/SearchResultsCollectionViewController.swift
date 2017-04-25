@@ -13,15 +13,24 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     
     var dataForSearch : (String, String) = ("","")
     
+    var refreshControll: UIRefreshControl! = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setFrames()
+
+        refreshControll.addTarget(self, action: #selector(SearchResultsCollectionViewController.refreshData), for: UIControlEvents.valueChanged)
+        collectionView?.refreshControl = refreshControll
         
+        refreshData()
+    }
+    
+    func refreshData() {
         EtsyAPI.shared.getProducts(inCategory: dataForSearch.0) {
+            self.refreshControll.endRefreshing()
             self.collectionView?.reloadData()
         }
-        
     }
     
 }
