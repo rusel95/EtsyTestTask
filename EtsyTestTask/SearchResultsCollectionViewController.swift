@@ -60,16 +60,15 @@ extension SearchResultsCollectionViewController {
         static let productCell = "ProductCollectionViewCell"
         static let showDetailSegue = "ShowSearchDetail"
         
-        static let leftAndRightPaddings : CGFloat = 20.0
+        static let leftAndRightPaddings : CGFloat = 7.0
         static let numberOfItemsPerRow : CGFloat = 3.0
     }
     
     func setFrames() {
         let collectionViewWidth = collectionView?.frame.width
-        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
+        let itemWidth = collectionViewWidth! / Storyboard.numberOfItemsPerRow - Storyboard.leftAndRightPaddings
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-        
     }
 }
