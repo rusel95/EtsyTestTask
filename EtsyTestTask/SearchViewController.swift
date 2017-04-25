@@ -23,7 +23,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         ProductsContainer.shared.foundProducts.removeAll()
         ProductsContainer.shared.imageCache.removeAllImages()
         
-        let searchData : (String, String) = (searchTextField.text!, categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)])
+        let searchData : (String, String) = (categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)], searchTextField.text!)
         self.performSegue(withIdentifier: "ShowSearchResults", sender: searchData)
     }
     

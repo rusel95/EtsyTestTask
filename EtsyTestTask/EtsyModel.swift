@@ -40,9 +40,9 @@ class EtsyAPI {
         }
     }
     
-    func getProducts(inCategory: String, giveData: @escaping () -> () ) -> Void {
+    func getProducts(inCategory: String, withKeywords: String, giveData: @escaping () -> () ) -> Void {
         
-        let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=terminator"
+        let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=" + withKeywords
         
         Alamofire.request(neededURL).validate().responseJSON { response in
             

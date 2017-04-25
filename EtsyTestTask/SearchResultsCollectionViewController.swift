@@ -81,7 +81,7 @@ extension SearchResultsCollectionViewController {
     }
     
     func refreshData() {
-        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0) {
+        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1) {
             self.refreshControll.endRefreshing()
             self.collectionView?.reloadData()
         }
