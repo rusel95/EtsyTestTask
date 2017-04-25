@@ -18,7 +18,11 @@ class DetailViewController: UIViewController {
     
     //MARK: Save to CoreData
     @IBAction func actionButton(_ sender: UIButton) {
-        DatabaseCRUD.shared.saveProduct(with: info)
+        if info != nil {
+            DatabaseController.shared.saveProduct(with: info)
+        } else {
+            DatabaseController.shared.deleteProduct(coreProduct: coreInfo)
+        }
     }
     
     var info : Product!

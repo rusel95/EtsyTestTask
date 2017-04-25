@@ -23,7 +23,7 @@ class BookmarksCollectionViewController: UICollectionViewController {
         
         setFrames()
     
-        ProductsContainer.shared.databaseProducts = DatabaseCRUD.shared.getCoreProducts()
+        ProductsContainer.shared.databaseProducts = DatabaseController.shared.getCoreProducts()
         self.collectionView?.reloadData()
     }
     

@@ -36,8 +36,6 @@ class DatabaseCRUD {
             
             let searchResults = try DatabaseController.getContext().fetch(fetchRequest)
             
-            print("number of results:", searchResults.count)
-            
             for result in searchResults as [CoreProduct] {
                 coreProducts.append( DatabaseProduct(name: result.name,
                                                      image: UIImage(data: (result.image! as Data) ),
@@ -52,7 +50,23 @@ class DatabaseCRUD {
         return coreProducts
     }
     
-    func deleteProduct(coreProduct: CoreProduct) -> Void {
-        //DatabaseController.getContext().delete(product)
+    func deleteProduct(coreProduct: DatabaseProduct) -> Void {
+        
+        let fetchRequest: NSFetchRequest<CoreProduct> = CoreProduct.fetchRequest()
+        do {
+            
+            let searchResults = try DatabaseController.getContext().fetch(fetchRequest)
+            
+            for result in searchResults as [CoreProduct] {
+                if result.name == coreProduct.name {
+                    DatabaseController.getContext().delete(result)
+                    DatabaseController.saveContext()
+                }
+            }
+            
+        } catch {
+            print("Error while fetching:", error)
+        }
+
     }
 }
