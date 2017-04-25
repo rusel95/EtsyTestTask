@@ -7,35 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 class BookmarksCollectionViewController: UICollectionViewController {
     
-    struct Storyboard {
-        static let productCell = "ProductCollectionViewCell"
-        static let showDetailSegue = "ShowBookmarksDetail"
-        
-        static let leftAndRightPaddings : CGFloat = 20.0
-        static let numberOfItemsPerRow : CGFloat = 3.0
-    }
+    var controller: NSFetchedResultsController<CoreProduct>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setFrames()
-    
-        ProductsContainer.shared.databaseProducts = DatabaseCRUD.shared.getCoreProducts()
-        self.collectionView?.reloadData()
     }
     
-    private func setFrames() {
-        let collectionViewWidth = collectionView?.frame.width
-        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
-        
-        let layout = collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+    override func viewWillAppear(_ animated: Bool) {
+        reloadWithNewData()
     }
+}
+
+//MARK: UICollectionViewDataSource
+extension BookmarksCollectionViewController {
     
-    //MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ProductsContainer.shared.databaseProducts.count
     }
@@ -58,5 +49,29 @@ class BookmarksCollectionViewController: UICollectionViewController {
             detailVC.coreInfo = sender as! DatabaseProduct
         }
     }
+}
 
+//MARK: more functions
+extension BookmarksCollectionViewController {
+    
+    struct Storyboard {
+        static let productCell = "ProductCollectionViewCell"
+        static let showDetailSegue = "ShowBookmarksDetail"
+        
+        static let leftAndRightPaddings : CGFloat = 20.0
+        static let numberOfItemsPerRow : CGFloat = 3.0
+    }
+    
+    func setFrames() {
+        let collectionViewWidth = collectionView?.frame.width
+        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
+        
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+    }
+    
+    func reloadWithNewData() {
+        ProductsContainer.shared.databaseProducts = DatabaseModel.shared.getCoreProducts()
+        self.collectionView?.reloadData()
+    }
 }

@@ -11,39 +11,24 @@ import UIKit
 
 class SearchResultsCollectionViewController: UICollectionViewController {
     
-    
-    
-    struct Storyboard {
-        static let productCell = "ProductCollectionViewCell"
-        static let showDetailSegue = "ShowSearchDetail"
-        
-        static let leftAndRightPaddings : CGFloat = 20.0
-        static let numberOfItemsPerRow : CGFloat = 3.0
-    }
-    
-    var searchData : (String, String) = ("","")
+    var dataForSearch : (String, String) = ("","")
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setFrames()
         
-        EtsyAPI.shared.getProducts(inCategory: searchData.0) { 
+        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0) {
             self.collectionView?.reloadData()
         }
         
     }
     
-    private func setFrames() {
-        let collectionViewWidth = collectionView?.frame.width
-        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
-        
-        let layout = collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-        
-    }
+}
+
+//MARK: UICollectionViewDataSource
+extension SearchResultsCollectionViewController {
     
-    //MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ProductsContainer.shared.foundProducts.count
     }
@@ -66,5 +51,25 @@ class SearchResultsCollectionViewController: UICollectionViewController {
             detailVC.info = sender as! Product
         }
     }
+}
+
+//MARK: more functions
+extension SearchResultsCollectionViewController {
     
+    struct Storyboard {
+        static let productCell = "ProductCollectionViewCell"
+        static let showDetailSegue = "ShowSearchDetail"
+        
+        static let leftAndRightPaddings : CGFloat = 20.0
+        static let numberOfItemsPerRow : CGFloat = 3.0
+    }
+    
+    func setFrames() {
+        let collectionViewWidth = collectionView?.frame.width
+        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
+        
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+    }
 }
