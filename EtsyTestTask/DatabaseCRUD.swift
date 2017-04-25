@@ -44,7 +44,6 @@ class DatabaseCRUD {
                                                      price: result.price,
                                                      description: result.descript) )
             }
-            print(coreProducts)
             
         } catch {
             print("Error while fetching:", error)
