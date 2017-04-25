@@ -10,32 +10,20 @@ import UIKit
 
 class BookmarksCollectionViewController: UICollectionViewController {
     
-    struct Storyboard {
-        static let productCell = "ProductCollectionViewCell"
-        static let showDetailSegue = "ShowBookmarksDetail"
-        
-        static let leftAndRightPaddings : CGFloat = 20.0
-        static let numberOfItemsPerRow : CGFloat = 3.0
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setFrames()
     
-        ProductsContainer.shared.databaseProducts = DatabaseController.shared.getCoreProducts()
+        ProductsContainer.shared.databaseProducts = DatabaseModel.shared.getCoreProducts()
         self.collectionView?.reloadData()
     }
+
+}
+
+//MARK: UICollectionViewDataSource
+extension BookmarksCollectionViewController {
     
-    private func setFrames() {
-        let collectionViewWidth = collectionView?.frame.width
-        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
-        
-        let layout = collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
-    }
-    
-    //MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return ProductsContainer.shared.databaseProducts.count
     }
@@ -58,5 +46,24 @@ class BookmarksCollectionViewController: UICollectionViewController {
             detailVC.coreInfo = sender as! DatabaseProduct
         }
     }
+}
 
+//MARK: more functions
+extension BookmarksCollectionViewController {
+    
+    struct Storyboard {
+        static let productCell = "ProductCollectionViewCell"
+        static let showDetailSegue = "ShowBookmarksDetail"
+        
+        static let leftAndRightPaddings : CGFloat = 20.0
+        static let numberOfItemsPerRow : CGFloat = 3.0
+    }
+    
+    func setFrames() {
+        let collectionViewWidth = collectionView?.frame.width
+        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
+        
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+    }
 }

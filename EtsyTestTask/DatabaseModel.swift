@@ -1,5 +1,5 @@
 //
-//  DatabaseController.swift
+//  DatabaseModel.swift
 //  CoreData Snippet
 //
 //  Copyright © 2017 rusel95. All rights reserved.
@@ -7,13 +7,13 @@
 import UIKit
 import CoreData
 
-class DatabaseController {
+class DatabaseModel {
     
-    static var shared = DatabaseController()
+    static var shared = DatabaseModel()
     private init() {}
     
     class func getContext() -> NSManagedObjectContext {
-        return DatabaseController.persistentContainer.viewContext
+        return DatabaseModel.persistentContainer.viewContext
     }
     
     //MARK: - Core Data stack
@@ -61,10 +61,10 @@ class DatabaseController {
 }
 
 //MARK: external extension for basic functions
-extension DatabaseController {
+extension DatabaseModel {
     
     func saveProduct(with info: Product) -> Void {
-        let product: CoreProduct = NSEntityDescription.insertNewObject(forEntityName: "CoreProduct", into: DatabaseController.getContext()) as! CoreProduct
+        let product: CoreProduct = NSEntityDescription.insertNewObject(forEntityName: "CoreProduct", into: DatabaseModel.getContext()) as! CoreProduct
         
         product.name = info.name
         if let image = UIImagePNGRepresentation( ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)! )! as NSData! {
@@ -73,7 +73,7 @@ extension DatabaseController {
         product.price = info.price
         product.descript = info.description
         
-        DatabaseController.saveContext()
+        DatabaseModel.saveContext()
     }
     
     func getCoreProducts() -> [DatabaseProduct] {
@@ -82,7 +82,7 @@ extension DatabaseController {
         var coreProducts = [DatabaseProduct]()
         do {
             
-            let searchResults = try DatabaseController.getContext().fetch(fetchRequest)
+            let searchResults = try DatabaseModel.getContext().fetch(fetchRequest)
             
             for result in searchResults as [CoreProduct] {
                 coreProducts.append( DatabaseProduct(name: result.name,
@@ -103,12 +103,12 @@ extension DatabaseController {
         let fetchRequest: NSFetchRequest<CoreProduct> = CoreProduct.fetchRequest()
         do {
             
-            let searchResults = try DatabaseController.getContext().fetch(fetchRequest)
+            let searchResults = try DatabaseModel.getContext().fetch(fetchRequest)
             
             for result in searchResults as [CoreProduct] {
                 if result.name == coreProduct.name {
-                    DatabaseController.getContext().delete(result)
-                    DatabaseController.saveContext()
+                    DatabaseModel.getContext().delete(result)
+                    DatabaseModel.saveContext()
                 }
             }
             

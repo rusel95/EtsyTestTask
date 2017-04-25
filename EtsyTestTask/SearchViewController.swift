@@ -30,7 +30,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowSearchResults" {
             let showSearchResultsCVC = segue.destination as! SearchResultsCollectionViewController
-            showSearchResultsCVC.searchData = sender as! (String, String)
+            showSearchResultsCVC.dataForSearch = sender as! (String, String)
         }
     }
     
