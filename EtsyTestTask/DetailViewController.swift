@@ -18,12 +18,14 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var addOutlet: UIButton!
     @IBAction func addButton(_ sender: UIButton) {
-            DatabaseModel.shared.saveProduct(with: info)
+        DatabaseModel.shared.saveProduct(with: info)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     @IBOutlet weak var deleteOutlet: UIButton!
     @IBAction func deleteButton(_ sender: Any) {
         DatabaseModel.shared.deleteProduct(coreProduct: coreInfo)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     //need to find out who is controller`s parent

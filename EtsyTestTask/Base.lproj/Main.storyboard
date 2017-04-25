@@ -18,10 +18,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="f31-55-NeB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="1" green="0.99215686270000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.98705524209999995" green="0.84606242180000002" blue="0.5392535329" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="19"/>
-                            <color key="textColor" red="0.2666666667" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.57250362629999996" green="0.57257461549999999" blue="0.57247948650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
@@ -36,7 +36,7 @@
         <scene sceneID="hjH-If-acH">
             <objects>
                 <collectionViewController id="BNP-yg-uai" customClass="BookmarksCollectionViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="oZs-Ma-Jdj">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="oZs-Ma-Jdj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,10 +106,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="1" green="0.99215686270000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.98705524209999995" green="0.84606242180000002" blue="0.5392535329" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="21"/>
-                            <color key="textColor" red="0.2666666667" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.57250362634658813" green="0.57257461547851562" blue="0.5724794864654541" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>
@@ -212,7 +212,7 @@
         <scene sceneID="YXC-tX-CVb">
             <objects>
                 <collectionViewController id="cH2-Bt-0AE" customClass="SearchResultsCollectionViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" indicatorStyle="black" dataMode="prototypes" id="HeN-Xx-jZy">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" misplaced="YES" indicatorStyle="black" dataMode="prototypes" id="HeN-Xx-jZy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -378,7 +378,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="1" green="0.99215686270000003" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="1" green="0.99215686270000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.2666666667" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="8GE-Cm-6up" kind="relationship" relationship="viewControllers" id="HRf-Zh-NdG"/>
