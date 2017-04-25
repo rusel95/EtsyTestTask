@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController {
     
@@ -15,19 +16,32 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailTextView: UITextView!
     
+    //MARK: Save to CoreData
     @IBAction func actionButton(_ sender: UIButton) {
+        DatabaseCRUD.shared.saveProduct(with: info)
     }
     
-    var info = Product()
+    var info : Product!
+    var coreInfo : DatabaseProduct!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nameLabel.text = info.name
-        photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
-        priceLabel.text = info.price
-        detailTextView.text = info.description
-        
+        setView()
+    }
+    
+    private func setView() {
+        if info != nil {
+            nameLabel.text = info.name
+            photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
+            priceLabel.text = info.price
+            detailTextView.text = info.description
+        } else {
+            nameLabel.text = coreInfo.name
+            photoImageView.image = coreInfo.image
+            priceLabel.text = coreInfo.price
+            detailTextView.text = coreInfo.description
+        }
     }
     
 }

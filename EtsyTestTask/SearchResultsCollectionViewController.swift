@@ -45,19 +45,19 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     
     //MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ProductsContainer.shared.array.count
+        return ProductsContainer.shared.foundProducts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let product = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.productCell, for: indexPath) as! ProductCollectionViewCell
         
-        product.info = ProductsContainer.shared.array[indexPath.item]
+        product.info = ProductsContainer.shared.foundProducts[indexPath.item]
         
         return product
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: Storyboard.showDetailSegue, sender: ProductsContainer.shared.array[indexPath.item])
+        self.performSegue(withIdentifier: Storyboard.showDetailSegue, sender: ProductsContainer.shared.foundProducts[indexPath.item])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
