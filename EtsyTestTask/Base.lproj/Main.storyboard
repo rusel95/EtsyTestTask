@@ -120,7 +120,7 @@
             </objects>
             <point key="canvasLocation" x="-684" y="-428"/>
         </scene>
-        <!--find the best for you!-->
+        <!--find some!-->
         <scene sceneID="xRg-fj-26O">
             <objects>
                 <viewController id="UDU-VE-tt4" customClass="SearchViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -185,7 +185,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="xQJ-oA-rBM"/>
-                    <navigationItem key="navigationItem" title="find the best for you!" id="ugK-Z4-1xz"/>
+                    <navigationItem key="navigationItem" title="find some!" id="ugK-Z4-1xz"/>
                     <connections>
                         <outlet property="categoryPickerView" destination="Uz3-Eg-8hf" id="tVI-EB-8MJ"/>
                         <outlet property="chooseLabel" destination="kFc-vp-bps" id="muZ-k0-h7s"/>
