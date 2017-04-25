@@ -25,7 +25,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
             
         }
     }
-    
+
     var coreInfo: DatabaseProduct! {
         didSet {
             nameLabel.text = coreInfo.name

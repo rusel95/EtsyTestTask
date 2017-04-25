@@ -24,6 +24,7 @@ class BookmarksCollectionViewController: UICollectionViewController {
         setFrames()
     
         ProductsContainer.shared.databaseProducts = DatabaseCRUD.shared.getCoreProducts()
+        self.collectionView?.reloadData()
     }
     
     private func setFrames() {
@@ -42,9 +43,7 @@ class BookmarksCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let product = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.productCell, for: indexPath) as! ProductCollectionViewCell
         
-        let item = ProductsContainer.shared.databaseProducts[indexPath.item]
-        print(item)
-        //product.coreInfo = ProductsContainer.shared.databaseProducts[indexPath.item]
+        product.coreInfo = ProductsContainer.shared.databaseProducts[indexPath.item]
         
         return product
     }
