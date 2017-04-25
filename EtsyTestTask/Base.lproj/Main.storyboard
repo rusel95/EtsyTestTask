@@ -36,7 +36,7 @@
         <scene sceneID="hjH-If-acH">
             <objects>
                 <collectionViewController id="BNP-yg-uai" customClass="BookmarksCollectionViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="oZs-Ma-Jdj">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="oZs-Ma-Jdj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -212,7 +212,7 @@
         <scene sceneID="YXC-tX-CVb">
             <objects>
                 <collectionViewController id="cH2-Bt-0AE" customClass="SearchResultsCollectionViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" misplaced="YES" indicatorStyle="black" dataMode="prototypes" id="HeN-Xx-jZy">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" indicatorStyle="black" dataMode="prototypes" id="HeN-Xx-jZy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -222,6 +222,10 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="1it-eP-bWA">
+                            <rect key="frame" x="0.0" y="-64" width="320" height="568"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCollectionViewCell" id="eSa-c7-iAV" customClass="ProductCollectionViewCell" customModule="EtsyTestTask" customModuleProvider="target">
                                 <rect key="frame" x="60" y="0.0" width="200" height="200"/>
@@ -266,6 +270,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="search results" id="M9e-kP-CyX"/>
                     <connections>
+                        <outlet property="searchActivityIndicator" destination="1it-eP-bWA" id="2cz-dV-4PP"/>
                         <segue destination="CbF-Dn-gGl" kind="show" identifier="ShowSearchDetail" id="NmJ-SE-NIP"/>
                     </connections>
                 </collectionViewController>

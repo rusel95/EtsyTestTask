@@ -11,6 +11,8 @@ import UIKit
 
 class SearchResultsCollectionViewController: UICollectionViewController {
     
+    @IBOutlet weak var searchActivityIndicator: UIActivityIndicatorView!
+    
     var dataForSearch : (String, String) = ("","")
     
     var refreshControll: UIRefreshControl! = UIRefreshControl()
@@ -18,7 +20,7 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setFrames()
+        setFramesAndViews()
 
         setRefreshControll()
         
@@ -65,12 +67,14 @@ extension SearchResultsCollectionViewController {
         static let numberOfItemsPerRow : CGFloat = 3.0
     }
     
-    func setFrames() {
+    func setFramesAndViews() {
         let collectionViewWidth = collectionView?.frame.width
         let itemWidth = collectionViewWidth! / Storyboard.numberOfItemsPerRow - Storyboard.leftAndRightPaddings
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        
+        searchActivityIndicator.startAnimating()
     }
     
     func setRefreshControll(){
@@ -84,6 +88,8 @@ extension SearchResultsCollectionViewController {
         EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1) {
             self.refreshControll.endRefreshing()
             self.collectionView?.reloadData()
+            self.searchActivityIndicator.stopAnimating()
+            self.searchActivityIndicator.isHidden = true
         }
     }
 }
