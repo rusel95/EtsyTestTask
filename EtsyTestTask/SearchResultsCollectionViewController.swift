@@ -20,17 +20,9 @@ class SearchResultsCollectionViewController: UICollectionViewController {
 
         setFrames()
 
-        refreshControll.addTarget(self, action: #selector(SearchResultsCollectionViewController.refreshData), for: UIControlEvents.valueChanged)
-        collectionView?.refreshControl = refreshControll
+        setRefreshControll()
         
         refreshData()
-    }
-    
-    func refreshData() {
-        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0) {
-            self.refreshControll.endRefreshing()
-            self.collectionView?.reloadData()
-        }
     }
     
 }
@@ -79,5 +71,19 @@ extension SearchResultsCollectionViewController {
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+    }
+    
+    func setRefreshControll(){
+        refreshControll.addTarget(self, action: #selector(SearchResultsCollectionViewController.refreshData), for: UIControlEvents.valueChanged)
+        refreshControll.tintColor = UIColor.blue
+        refreshControll.attributedTitle = NSAttributedString(string: "refreshing...", attributes: [NSForegroundColorAttributeName: refreshControll.tintColor])
+        collectionView?.refreshControl = refreshControll
+    }
+    
+    func refreshData() {
+        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0) {
+            self.refreshControll.endRefreshing()
+            self.collectionView?.reloadData()
+        }
     }
 }
