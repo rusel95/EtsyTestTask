@@ -74,6 +74,7 @@ extension SearchResultsCollectionViewController {
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
         
+        searchActivityIndicator.color = UIColor.blue
         searchActivityIndicator.startAnimating()
     }
     
