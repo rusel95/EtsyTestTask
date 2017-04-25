@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import CoreData
 
 class BookmarksCollectionViewController: UICollectionViewController {
+    
+    var controller: NSFetchedResultsController<CoreProduct>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setFrames()
-    
-        ProductsContainer.shared.databaseProducts = DatabaseModel.shared.getCoreProducts()
-        self.collectionView?.reloadData()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadWithNewData()
+    }
 }
 
 //MARK: UICollectionViewDataSource
@@ -65,5 +68,10 @@ extension BookmarksCollectionViewController {
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+    }
+    
+    func reloadWithNewData() {
+        ProductsContainer.shared.databaseProducts = DatabaseModel.shared.getCoreProducts()
+        self.collectionView?.reloadData()
     }
 }

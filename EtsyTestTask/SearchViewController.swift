@@ -8,10 +8,10 @@
 
 import UIKit
 
-var categoriesContainer = [String]()
-
 class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    var categoriesContainer = [String]()
+    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var categoryPickerView: UIPickerView!
     @IBOutlet weak var submitButton: UIButton!
@@ -49,7 +49,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         self.chooseLabel.isHidden = true
         
         EtsyAPI.shared.getCategories { categories in
-            categoriesContainer = categories
+            self.categoriesContainer = categories
             self.categoryPickerView.isHidden = false
             self.submitButton.isHidden = false
             self.downloadingLabel.isHidden = true
