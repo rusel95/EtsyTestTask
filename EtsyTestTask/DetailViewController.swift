@@ -16,13 +16,14 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailTextView: UITextView!
     
-    @IBOutlet weak var actionOutlet: UIButton!
-    @IBAction func actionButton(_ sender: UIButton) {
-        if info != nil {
+    @IBOutlet weak var addOutlet: UIButton!
+    @IBAction func addButton(_ sender: UIButton) {
             DatabaseModel.shared.saveProduct(with: info)
-        } else {
-            DatabaseModel.shared.deleteProduct(coreProduct: coreInfo)
-        }
+    }
+    
+    @IBOutlet weak var deleteOutlet: UIButton!
+    @IBAction func deleteButton(_ sender: Any) {
+        DatabaseModel.shared.deleteProduct(coreProduct: coreInfo)
     }
     
     //need to find out who is controller`s parent
@@ -44,13 +45,15 @@ class DetailViewController: UIViewController {
             photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
             priceLabel.text = info.price
             detailTextView.text = info.description
-            actionOutlet.titleLabel?.text = "Save to bookmarks"
+            addOutlet.isHidden = false
+            deleteOutlet.isHidden = true
         } else {
             nameLabel.text = coreInfo.name
             photoImageView.image = coreInfo.image
             priceLabel.text = coreInfo.price
             detailTextView.text = coreInfo.description
-            actionOutlet.titleLabel?.text = "Delete from bookmarks"
+            addOutlet.isHidden = true
+            deleteOutlet.isHidden = false
         }
     }
     
