@@ -21,17 +21,18 @@ class EtsyAPI {
     private let productsSearchRequestURL = "https://openapi.etsy.com/v2/listings/active"
     private let listingImagesRequestURL = "https://openapi.etsy.com/v2/listings/"
     
-    func getCategories(giveData: @escaping ([String]) -> () ) -> Void {
+    func getCategories(giveData: @escaping ([(String,String)]) -> () ) -> Void {
         
         Alamofire.request(categoriesRequestURL + apiKey).validate().responseJSON { response in
             
             switch response.result {
             case .success:
-                var categories = [String]()
+                var categories = [(String,String)]()
                 let json = JSON(response.result.value!)
                 let categoriesJSON = json["results"]
+                print(categoriesJSON)
                 for categorie in categoriesJSON {
-                    categories.append(categorie.1["long_name"].string!)
+                    categories.append((categorie.1["category_name"].string!, categorie.1["long_name"].string!) )
                 }
                 giveData(categories)
             case .failure(let error):

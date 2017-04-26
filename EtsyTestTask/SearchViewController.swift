@@ -10,7 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    var categoriesContainer = [String]()
+    var categoriesContainer = [(String,String)]()
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var categoryPickerView: UIPickerView!
@@ -23,7 +23,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         ProductsContainer.shared.foundProducts.removeAll()
         ProductsContainer.shared.imageCache.removeAllImages()
         
-        let searchData : (String, String) = (categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)], searchTextField.text!)
+        let searchData : (String, String) = (categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)].0 , searchTextField.text!)
         self.performSegue(withIdentifier: "ShowSearchResults", sender: searchData)
     }
     
@@ -67,7 +67,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categoriesContainer[row]
+        return categoriesContainer[row].1
     }
 }
 
