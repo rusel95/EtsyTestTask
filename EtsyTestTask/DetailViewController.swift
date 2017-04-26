@@ -47,9 +47,14 @@ class DetailViewController: UIViewController {
             photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
             priceLabel.text = info.price
             detailTextView.text = info.description
-            addOutlet.isHidden = false
-            deleteOutlet.isHidden = true
-        } else {
+            if DatabaseModel.shared.ifProductInDatabase(newProduct: info) {
+                addOutlet.isHidden = true
+                deleteOutlet.isHidden = false
+            } else {
+                addOutlet.isHidden = false
+                deleteOutlet.isHidden = true
+            }
+        } else if coreInfo != nil {
             nameLabel.text = coreInfo.name
             photoImageView.image = coreInfo.image
             priceLabel.text = coreInfo.price

@@ -123,7 +123,7 @@ extension DatabaseModel {
         }
     }
     
-    private func ifProductInDatabase(newProduct: Product) -> Bool {
+    func ifProductInDatabase(newProduct: Product) -> Bool {
         
         var existing = false
         

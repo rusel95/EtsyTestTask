@@ -30,7 +30,6 @@ class EtsyAPI {
                 var categories = [(String,String)]()
                 let json = JSON(response.result.value!)
                 let categoriesJSON = json["results"]
-                print(categoriesJSON)
                 for categorie in categoriesJSON {
                     categories.append((categorie.1["category_name"].string!, categorie.1["long_name"].string!) )
                 }
