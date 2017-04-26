@@ -74,7 +74,7 @@ class EtsyAPI {
                 giveData()
                 
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

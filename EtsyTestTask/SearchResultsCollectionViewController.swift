@@ -86,11 +86,16 @@ extension SearchResultsCollectionViewController {
     }
     
     func refreshData() {
+        ProductsContainer.shared.foundProducts.removeAll()
         EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1) {
             self.refreshControll.endRefreshing()
             self.collectionView?.reloadData()
             self.searchActivityIndicator.stopAnimating()
             self.searchActivityIndicator.isHidden = true
+            print(ProductsContainer.shared.foundProducts.count)
+            if(ProductsContainer.shared.foundProducts.count == 0) {
+                SingleTone.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
+            }
         }
     }
 }
