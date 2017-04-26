@@ -64,16 +64,22 @@ class DatabaseModel {
 extension DatabaseModel {
     
     func saveProduct(with info: Product) -> Void {
-        let product: CoreProduct = NSEntityDescription.insertNewObject(forEntityName: "CoreProduct", into: DatabaseModel.getContext()) as! CoreProduct
         
-        product.name = info.name
-        if let image = UIImagePNGRepresentation( ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)! )! as NSData! {
-            product.image = image
+        if !ifProductInDatabase(newProduct: info) {
+            
+            let product: CoreProduct = NSEntityDescription.insertNewObject(forEntityName: "CoreProduct", into: DatabaseModel.getContext()) as! CoreProduct
+            
+            product.name = info.name
+            if let image = UIImagePNGRepresentation( ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)! )! as NSData! {
+                product.image = image
+            }
+            product.price = info.price
+            product.descript = info.description
+            
+            DatabaseModel.saveContext()
+        } else {
+            print("such product is already in Database")
         }
-        product.price = info.price
-        product.descript = info.description
-        
-        DatabaseModel.saveContext()
     }
     
     func getCoreProducts() -> [DatabaseProduct] {
@@ -115,7 +121,20 @@ extension DatabaseModel {
         } catch {
             print("Error while fetching:", error)
         }
+    }
+    
+    private func ifProductInDatabase(newProduct: Product) -> Bool {
         
+        var existing = false
+        
+        let currentDatabaseProducts = getCoreProducts()
+        for product in currentDatabaseProducts {
+            if newProduct.name == product.name {
+                existing = true
+            }
+        }
+        
+        return existing
     }
     
 }
