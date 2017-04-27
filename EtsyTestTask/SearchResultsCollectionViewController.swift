@@ -18,6 +18,12 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     
     var refreshControll: UIRefreshControl! = UIRefreshControl()
     
+    var isDataLoading : Bool = false
+    var pageNo : Int = 0
+    var limit : Int = 25
+    var offset : Int = 0 //pageNo*limit
+    var didEndReached : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,17 +50,6 @@ extension SearchResultsCollectionViewController {
             product.info = ProductsContainer.shared.foundProducts[indexPath.item]
         }
         
-        print(ProductsContainer.shared.foundProducts.count, indexPath.row, indexPath.item)
-        let itemsToLoadFromBottom = 5
-        let itemsLoaded = indexPath.item
-        if !isLoadingProducts && (indexPath.item >= (itemsLoaded - itemsToLoadFromBottom)) {
-            let totalItems = ProductsContainer.shared.foundProducts.count - 1
-            let remainingSpeciesToLoad = totalItems - itemsLoaded
-            if remainingSpeciesToLoad > 0 {
-                print("need to load in here")
-            }
-        }
-        
         return product
     }
     
@@ -69,24 +64,19 @@ extension SearchResultsCollectionViewController {
         }
     }
     
-    //MARK: Pagination
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-        //Bottom Refresh
+        print("scrollViewDidEndDragging")
         
-        if scrollView == collectionView {
+        if (((collectionView?.contentOffset.y)! + (collectionView?.frame.size.height)!) >= (collectionView?.contentSize.height)!) {
             
-            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
-            {
-                print("need to make pagination in here")
-//                if !isNewDataLoading{
-//                    
-//                    if helperInstance.isConnectedToNetwork(){
-//                        
-//                        isNewDataLoading = true
-//                        getNewData()
-//                    }
-//                }
+            if !isDataLoading{
+                self.isDataLoading = true
+                self.pageNo = self.pageNo + 1
+                self.limit = self.limit + 10
+                self.offset = self.limit * self.pageNo
+                //loadCallLogData(offset: self.offset, limit: self.limit)
+                print("loadCallLogData(offset: ", offset, ",limit: ", limit)
             }
         }
     }
