@@ -39,7 +39,9 @@ extension SearchResultsCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let product = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.productCell, for: indexPath) as! ProductCollectionViewCell
         
-        product.info = ProductsContainer.shared.foundProducts[indexPath.item]
+        if ProductsContainer.shared.foundProducts.count != 0 {
+            product.info = ProductsContainer.shared.foundProducts[indexPath.item]
+        }
         
         return product
     }
@@ -86,15 +88,18 @@ extension SearchResultsCollectionViewController {
     }
     
     func refreshData() {
-        ProductsContainer.shared.foundProducts.removeAll()
+        
+        ProductsContainer.shared.foundProducts.removeAll() //needed because every time whyle downloaing data appends
+        
         EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1) {
-            self.refreshControll.endRefreshing()
-            self.collectionView?.reloadData()
-            self.searchActivityIndicator.stopAnimating()
-            self.searchActivityIndicator.isHidden = true
-            print(ProductsContainer.shared.foundProducts.count)
+            
             if(ProductsContainer.shared.foundProducts.count == 0) {
                 SingleTone.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
+            } else {
+                self.refreshControll.endRefreshing()
+                self.collectionView?.reloadData()
+                self.searchActivityIndicator.stopAnimating()
+                self.searchActivityIndicator.isHidden = true
             }
         }
     }
