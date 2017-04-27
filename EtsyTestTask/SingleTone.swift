@@ -15,7 +15,7 @@ class SingleTone {
     
     func createAlert(title: String, message: String, currentView: UIViewController, controllerToDismiss: UINavigationController) {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         alert.addAction(UIAlertAction.init(title: "Continue", style: UIAlertActionStyle.destructive, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
