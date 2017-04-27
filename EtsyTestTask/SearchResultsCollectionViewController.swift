@@ -66,12 +66,16 @@ extension SearchResultsCollectionViewController {
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-        print("scrollViewDidEndDragging")
+//        print("scrollViewDidEndDragging")
+//        print("\n collection content y: ", collectionView?.contentOffset.y ,
+//              "\n collection frame height: ", collectionView?.frame.size.height,
+//              "\n collection content heifht: ", collectionView?.contentSize.height,
+//              "\n collection content heifht - constant: ", (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0)
         
-        if (((collectionView?.contentOffset.y)! + (collectionView?.frame.size.height)!) >= (collectionView?.contentSize.height)!) {
+        if ((collectionView?.contentOffset.y)! + (collectionView?.frame.size.height)! >= (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0) {
             
             if !isDataLoading{
-                self.isDataLoading = true
+                //self.isDataLoading = true
                 self.pageNo = self.pageNo + 1
                 self.limit = self.limit + 10
                 self.offset = self.limit * self.pageNo
