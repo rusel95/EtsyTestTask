@@ -17,6 +17,8 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var downloadingLabel: UILabel!
     @IBOutlet weak var chooseLabel: UILabel!
+    @IBOutlet weak var downloadingActivityIndicator: UIActivityIndicatorView!
+   
     
     @IBAction func submitAction(_ sender: UIButton) {
         
@@ -48,9 +50,11 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     private func categoriesDownloading() {
+        
         self.categoryPickerView.isHidden = true
         self.submitButton.isHidden = true
         self.chooseLabel.isHidden = true
+        self.downloadingActivityIndicator.startAnimating()
         
         EtsyAPI.shared.getCategories { categories in
             self.categoriesContainer = categories
@@ -58,6 +62,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             self.submitButton.isHidden = false
             self.downloadingLabel.isHidden = true
             self.chooseLabel.isHidden = false
+            self.downloadingActivityIndicator.stopAnimating()
             self.categoryPickerView.reloadAllComponents()
         }
     }
