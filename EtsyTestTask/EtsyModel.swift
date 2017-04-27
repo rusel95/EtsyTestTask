@@ -42,9 +42,9 @@ class EtsyAPI {
     
     func getProducts(inCategory: String, withKeywords: String, giveData: @escaping () -> () ) -> Void {
         let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=" + withKeywords
-        
+        isLoadingProducts = true
         Alamofire.request(neededURL).validate().responseJSON { response in
-       
+            isLoadingProducts = false
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)

@@ -8,6 +8,7 @@
 
 import UIKit
 
+var isLoadingProducts = false
 
 class SearchResultsCollectionViewController: UICollectionViewController {
     
@@ -43,6 +44,17 @@ extension SearchResultsCollectionViewController {
             product.info = ProductsContainer.shared.foundProducts[indexPath.item]
         }
         
+        print(ProductsContainer.shared.foundProducts.count, indexPath.row, indexPath.item)
+        let itemsToLoadFromBottom = 5
+        let itemsLoaded = indexPath.item
+        if !isLoadingProducts && (indexPath.item >= (itemsLoaded - itemsToLoadFromBottom)) {
+            let totalItems = ProductsContainer.shared.foundProducts.count - 1
+            let remainingSpeciesToLoad = totalItems - itemsLoaded
+            if remainingSpeciesToLoad > 0 {
+                print("need to load in here")
+            }
+        }
+        
         return product
     }
     
@@ -56,6 +68,29 @@ extension SearchResultsCollectionViewController {
             detailVC.info = sender as! Product
         }
     }
+    
+    //MARK: Pagination
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        //Bottom Refresh
+        
+        if scrollView == collectionView {
+            
+            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height)
+            {
+                print("need to make pagination in here")
+//                if !isNewDataLoading{
+//                    
+//                    if helperInstance.isConnectedToNetwork(){
+//                        
+//                        isNewDataLoading = true
+//                        getNewData()
+//                    }
+//                }
+            }
+        }
+    }
+    
 }
 
 //MARK: more functions
@@ -94,7 +129,7 @@ extension SearchResultsCollectionViewController {
         EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1) {
             
             if(ProductsContainer.shared.foundProducts.count == 0) {
-                SingleTone.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
+                HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
             } else {
                 self.refreshControll.endRefreshing()
                 self.collectionView?.reloadData()

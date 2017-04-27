@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SingleTone {
+class HelperInstance {
     
-    static let shared = SingleTone()
+    static let shared = HelperInstance()
     private init () { }
     
     func createAlert(title: String, message: String, currentView: UIViewController, controllerToDismiss: UINavigationController) {

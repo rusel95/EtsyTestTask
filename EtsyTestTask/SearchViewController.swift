@@ -29,7 +29,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             let searchData : (String, String) = (categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)].0 , searchTextField.text!)
             self.performSegue(withIdentifier: "ShowSearchResults", sender: searchData)
         } else {
-            SingleTone.shared.createAlert(title: "OoOops", message: "Looks like you have`t entered any product name.. Please, do that!", currentView: self, controllerToDismiss: self.navigationController!)
+            HelperInstance.shared.createAlert(title: "OoOops", message: "Looks like you have`t entered any product name.. Please, do that!", currentView: self, controllerToDismiss: self.navigationController!)
         }
     }
     
