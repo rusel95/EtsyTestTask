@@ -10,7 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    var categoriesContainer = [String]()
+    var categoriesContainer = [(String,String)]()
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var categoryPickerView: UIPickerView!
@@ -20,11 +20,15 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     @IBAction func submitAction(_ sender: UIButton) {
         
-        ProductsContainer.shared.foundProducts.removeAll()
-        ProductsContainer.shared.imageCache.removeAllImages()
-        
-        let searchData : (String, String) = (searchTextField.text!, categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)])
-        self.performSegue(withIdentifier: "ShowSearchResults", sender: searchData)
+        if searchTextField.text != "" {
+            ProductsContainer.shared.foundProducts.removeAll()
+            ProductsContainer.shared.imageCache.removeAllImages()
+            
+            let searchData : (String, String) = (categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)].0 , searchTextField.text!)
+            self.performSegue(withIdentifier: "ShowSearchResults", sender: searchData)
+        } else {
+            SingleTone.shared.createAlert(title: "OoOops", message: "Looks like you have`t entered any product name.. Please, do that!", currentView: self, controllerToDismiss: self.navigationController!)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,7 +71,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categoriesContainer[row]
+        return categoriesContainer[row].1
     }
 }
 

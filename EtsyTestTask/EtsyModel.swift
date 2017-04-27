@@ -21,17 +21,17 @@ class EtsyAPI {
     private let productsSearchRequestURL = "https://openapi.etsy.com/v2/listings/active"
     private let listingImagesRequestURL = "https://openapi.etsy.com/v2/listings/"
     
-    func getCategories(giveData: @escaping ([String]) -> () ) -> Void {
+    func getCategories(giveData: @escaping ([(String,String)]) -> () ) -> Void {
         
         Alamofire.request(categoriesRequestURL + apiKey).validate().responseJSON { response in
             
             switch response.result {
             case .success:
-                var categories = [String]()
+                var categories = [(String,String)]()
                 let json = JSON(response.result.value!)
                 let categoriesJSON = json["results"]
                 for categorie in categoriesJSON {
-                    categories.append(categorie.1["long_name"].string!)
+                    categories.append((categorie.1["category_name"].string!, categorie.1["long_name"].string!) )
                 }
                 giveData(categories)
             case .failure(let error):
@@ -40,9 +40,9 @@ class EtsyAPI {
         }
     }
     
-    func getProducts(inCategory: String, giveData: @escaping () -> () ) -> Void {
+    func getProducts(inCategory: String, withKeywords: String, giveData: @escaping () -> () ) -> Void {
         
-        let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=terminator"
+        let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=" + withKeywords
         
         Alamofire.request(neededURL).validate().responseJSON { response in
             
@@ -74,7 +74,7 @@ class EtsyAPI {
                 giveData()
                 
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

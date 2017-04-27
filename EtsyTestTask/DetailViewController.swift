@@ -16,13 +16,16 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var detailTextView: UITextView!
     
-    @IBOutlet weak var actionOutlet: UIButton!
-    @IBAction func actionButton(_ sender: UIButton) {
-        if info != nil {
-            DatabaseModel.shared.saveProduct(with: info)
-        } else {
-            DatabaseModel.shared.deleteProduct(coreProduct: coreInfo)
-        }
+    @IBOutlet weak var addOutlet: UIButton!
+    @IBAction func addButton(_ sender: UIButton) {
+        DatabaseModel.shared.saveProduct(with: info)
+        SingleTone.shared.createAlert(title: "Adding", message: "Product added! Continue shopping... ", currentView: self, controllerToDismiss: navigationController!)
+    }
+    
+    @IBOutlet weak var deleteOutlet: UIButton!
+    @IBAction func deleteButton(_ sender: Any) {
+        DatabaseModel.shared.deleteProduct(coreProduct: coreInfo)
+        SingleTone.shared.createAlert(title: "Deleting", message: "Product deleted! Continue shopping... ", currentView: self, controllerToDismiss: navigationController!)
     }
     
     //need to find out who is controller`s parent
@@ -44,14 +47,22 @@ class DetailViewController: UIViewController {
             photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
             priceLabel.text = info.price
             detailTextView.text = info.description
-            actionOutlet.titleLabel?.text = "Save to bookmarks"
-        } else {
+            if DatabaseModel.shared.ifProductInDatabase(newProduct: info) {
+                addOutlet.isHidden = true
+                deleteOutlet.isHidden = false
+            } else {
+                addOutlet.isHidden = false
+                deleteOutlet.isHidden = true
+            }
+        } else if coreInfo != nil {
             nameLabel.text = coreInfo.name
             photoImageView.image = coreInfo.image
             priceLabel.text = coreInfo.price
             detailTextView.text = coreInfo.description
-            actionOutlet.titleLabel?.text = "Delete from bookmarks"
+            addOutlet.isHidden = true
+            deleteOutlet.isHidden = false
         }
     }
     
 }
+

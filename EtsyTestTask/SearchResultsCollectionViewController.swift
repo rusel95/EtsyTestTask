@@ -11,17 +11,20 @@ import UIKit
 
 class SearchResultsCollectionViewController: UICollectionViewController {
     
+    @IBOutlet weak var searchActivityIndicator: UIActivityIndicatorView!
+    
     var dataForSearch : (String, String) = ("","")
+    
+    var refreshControll: UIRefreshControl! = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setFrames()
+        setFramesAndViews()
+
+        setRefreshControll()
         
-        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0) {
-            self.collectionView?.reloadData()
-        }
-        
+        refreshData()
     }
     
 }
@@ -60,16 +63,39 @@ extension SearchResultsCollectionViewController {
         static let productCell = "ProductCollectionViewCell"
         static let showDetailSegue = "ShowSearchDetail"
         
-        static let leftAndRightPaddings : CGFloat = 20.0
+        static let leftAndRightPaddings : CGFloat = 7.0
         static let numberOfItemsPerRow : CGFloat = 3.0
     }
     
-    func setFrames() {
+    func setFramesAndViews() {
         let collectionViewWidth = collectionView?.frame.width
-        let itemWidth = (collectionViewWidth! - Storyboard.leftAndRightPaddings) / Storyboard.numberOfItemsPerRow
+        let itemWidth = collectionViewWidth! / Storyboard.numberOfItemsPerRow - Storyboard.leftAndRightPaddings
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
         
+        searchActivityIndicator.color = UIColor.blue
+        searchActivityIndicator.startAnimating()
+    }
+    
+    func setRefreshControll(){
+        refreshControll.addTarget(self, action: #selector(SearchResultsCollectionViewController.refreshData), for: UIControlEvents.valueChanged)
+        refreshControll.tintColor = UIColor.blue
+        refreshControll.attributedTitle = NSAttributedString(string: "refreshing...", attributes: [NSForegroundColorAttributeName: refreshControll.tintColor])
+        collectionView?.refreshControl = refreshControll
+    }
+    
+    func refreshData() {
+        ProductsContainer.shared.foundProducts.removeAll()
+        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1) {
+            self.refreshControll.endRefreshing()
+            self.collectionView?.reloadData()
+            self.searchActivityIndicator.stopAnimating()
+            self.searchActivityIndicator.isHidden = true
+            print(ProductsContainer.shared.foundProducts.count)
+            if(ProductsContainer.shared.foundProducts.count == 0) {
+                SingleTone.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
+            }
+        }
     }
 }
