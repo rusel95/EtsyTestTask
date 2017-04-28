@@ -40,8 +40,8 @@ class EtsyAPI {
         }
     }
     
-    func getProducts(inCategory: String, withKeywords: String, giveData: @escaping () -> () ) -> Void {
-        let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=" + withKeywords
+    func getProducts(inCategory: String, withKeywords: String, limit: Int, offset: Int, giveData: @escaping () -> () ) -> Void {
+        let neededURL = productsSearchRequestURL + apiKey + "&limit=" + String(limit) + "&offset=" + String(offset) + "&category=" + inCategory + "&keywords=" + withKeywords
         isLoadingProducts = true
         Alamofire.request(neededURL).validate().responseJSON { response in
             isLoadingProducts = false
@@ -78,6 +78,45 @@ class EtsyAPI {
         }
     }
     
+//    func getProducts(inCategory: String, withKeywords: String, giveData: @escaping () -> () ) -> Void {
+//        let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=" + withKeywords
+//        isLoadingProducts = true
+//        Alamofire.request(neededURL).validate().responseJSON { response in
+//            isLoadingProducts = false
+//            switch response.result {
+//            case .success:
+//                let json = JSON(response.result.value!)
+//                let productList = json["results"]
+//                
+//                for product in productList {
+//                    
+//                    var tempProduct = Product()
+//                    
+//                    if let name = product.1["title"].string {
+//                        tempProduct.name = name
+//                    }
+//                    if let listingId = product.1["listing_id"].int {
+//                        tempProduct.listingId = String(listingId)
+//                    } else {
+//                        print("\n\nerror whyle getting listing_id from json\n\n")
+//                    }
+//                    if let price = product.1["price"].string {
+//                        tempProduct.price = price + " $"
+//                    }
+//                    if let descriprion = product.1["description"].string {
+//                        tempProduct.description = descriprion
+//                    }
+//                    ProductsContainer.shared.foundProducts.append(tempProduct)
+//                }
+//                giveData()
+//                
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+
+    
     func getImage(listingId: String, giveImage: @escaping (UIImage) -> () ) -> Void {
         
         if let image = ProductsContainer.shared.imageCache.image(withIdentifier: listingId) {
@@ -106,16 +145,28 @@ class EtsyAPI {
         let currentImageRequestURL = listingImagesRequestURL + listingId + "/images" + apiKey
         
         Alamofire.request(currentImageRequestURL).validate().responseJSON { response in
-            
+
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
+                
                 let results = json["results"].array!
-                let imageURL = results[0]["url_170x135"].string!
-                giveData(imageURL)
+                //print(results, currentImageRequestURL)
+                
+                var trueImageURL = String()
+                
+                if let imageURL = results[0]["url_75x75"].string {
+                    trueImageURL = imageURL
+                }
+                if let imageURL = results[0]["url_170x135"].string {
+                    trueImageURL = imageURL
+                }
+                
+                giveData(trueImageURL)
                 
             case .failure(let error):
-                print("Error: ", error, "\nin: ", currentImageRequestURL)
+                //print("\n\nError: ", error.localizedDescription, "\nin: ", currentImageRequestURL)
+                break
             }
         }
     }

@@ -19,19 +19,19 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     var refreshControll: UIRefreshControl! = UIRefreshControl()
     
     var isDataLoading : Bool = false
-    var pageNo : Int = 0
-    var limit : Int = 25
+    var currentPage : Int = 0
+    var limit : Int = 30
     var offset : Int = 0 //pageNo*limit
     var didEndReached : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setFramesAndViews()
-
+        
         setRefreshControll()
         
-        refreshData()
+        self.refreshData(category: dataForSearch.0, keywords: dataForSearch.1)
     }
     
 }
@@ -66,25 +66,22 @@ extension SearchResultsCollectionViewController {
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-//        print("scrollViewDidEndDragging")
-//        print("\n collection content y: ", collectionView?.contentOffset.y ,
-//              "\n collection frame height: ", collectionView?.frame.size.height,
-//              "\n collection content heifht: ", collectionView?.contentSize.height,
-//              "\n collection content heifht - constant: ", (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0)
+        //        print("scrollViewDidEndDragging")
+        //        print("\n collection content y: ", collectionView?.contentOffset.y ,
+        //              "\n collection frame height: ", collectionView?.frame.size.height,
+        //              "\n collection content heifht: ", collectionView?.contentSize.height,
+        //              "\n collection content heifht - constant: ", (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0)
         
         if ((collectionView?.contentOffset.y)! + (collectionView?.frame.size.height)! >= (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0) {
             
             if !isDataLoading{
-                //self.isDataLoading = true
-                self.pageNo = self.pageNo + 1
-                self.limit = self.limit + 10
-                self.offset = self.limit * self.pageNo
-                //loadCallLogData(offset: self.offset, limit: self.limit)
+                self.currentPage = self.currentPage + 1
+                self.offset = self.limit * self.currentPage
+                downloadMoreData(category: dataForSearch.0, keywords: dataForSearch.1)
                 print("loadCallLogData(offset: ", offset, ",limit: ", limit)
             }
         }
     }
-    
 }
 
 //MARK: more functions
@@ -116,11 +113,13 @@ extension SearchResultsCollectionViewController {
         collectionView?.refreshControl = refreshControll
     }
     
-    func refreshData() {
+    func refreshData(category: String, keywords: String) {
         
         ProductsContainer.shared.foundProducts.removeAll() //needed because every time whyle downloaing data appends
         
-        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1) {
+        self.offset = 0
+        
+        EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) {
             
             if(ProductsContainer.shared.foundProducts.count == 0) {
                 HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
@@ -131,5 +130,21 @@ extension SearchResultsCollectionViewController {
                 self.searchActivityIndicator.isHidden = true
             }
         }
+    }
+    
+    func downloadMoreData(category: String, keywords: String) {
+        
+        self.isDataLoading = true
+        EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) {
+            print(self.isDataLoading, self.limit, self.offset)
+            self.isDataLoading = false
+            
+            if(ProductsContainer.shared.foundProducts.count == 0) {
+                HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no more results for pagination...", currentView: self, controllerToDismiss: self.navigationController!)
+            } else {
+                self.collectionView?.reloadData()
+            }
+        }
+        
     }
 }
