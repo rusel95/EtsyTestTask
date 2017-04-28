@@ -31,7 +31,7 @@ class SearchResultsCollectionViewController: UICollectionViewController {
         
         setRefreshControll()
         
-        self.refreshData(category: dataForSearch.0, keywords: dataForSearch.1)
+        self.refreshData()
     }
     
 }
@@ -113,13 +113,13 @@ extension SearchResultsCollectionViewController {
         collectionView?.refreshControl = refreshControll
     }
     
-    func refreshData(category: String, keywords: String) {
+    func refreshData() {
         
         ProductsContainer.shared.foundProducts.removeAll() //needed because every time whyle downloaing data appends
         
         self.offset = 0
         
-        EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) {
+        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1, limit: self.limit, offset: self.offset) {
             
             if(ProductsContainer.shared.foundProducts.count == 0) {
                 HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
