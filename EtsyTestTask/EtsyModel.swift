@@ -35,17 +35,16 @@ class EtsyAPI {
                 }
                 giveData(categories)
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }
     
-    func getProducts(inCategory: String, withKeywords: String, giveData: @escaping () -> () ) -> Void {
-        
-        let neededURL = productsSearchRequestURL + apiKey + "&category=" + inCategory + "&keywords=" + withKeywords
-        
+    func getProducts(inCategory: String, withKeywords: String, limit: Int, offset: Int, giveData: @escaping () -> () ) -> Void {
+        let neededURL = productsSearchRequestURL + apiKey + "&limit=" + String(limit) + "&offset=" + String(offset) + "&category=" + inCategory + "&keywords=" + withKeywords
+        isLoadingProducts = true
         Alamofire.request(neededURL).validate().responseJSON { response in
-            
+            isLoadingProducts = false
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
@@ -89,15 +88,26 @@ class EtsyAPI {
                 
                 Alamofire.request(realImageURL).validate().responseImage { response in
                     
-                    if let realImage = response.result.value {
-                        // Add to Alamofire cache
-                        ProductsContainer.shared.imageCache.add(realImage, withIdentifier: listingId)
-                        
-                        //Fetch From Alamofire cache and give data
-                        giveImage( realImage )
+                    switch response.result {
+                    case .success:
+                        if let realImage = response.result.value {
+                            // Add to Alamofire cache
+                            ProductsContainer.shared.imageCache.add(realImage, withIdentifier: listingId)
+                            
+                            //Fetch From Alamofire cache and give data
+                            giveImage( realImage )
+                        }
+                    case .failure:
+                        for product in ProductsContainer.shared.foundProducts {
+                            if product.listingId == listingId {
+                                print("error in product: ", product.name)
+                            }
+                        }
+                        break
                     }
                 }
             }
+            
         }
     }
     
@@ -111,12 +121,29 @@ class EtsyAPI {
             switch response.result {
             case .success:
                 let json = JSON(response.result.value!)
+                
                 let results = json["results"].array!
-                let imageURL = results[0]["url_170x135"].string!
-                giveData(imageURL)
+                //print(results, currentImageRequestURL)
+                
+                var trueImageURL = String()
+                
+                if let imageURL = results[0]["url_75x75"].string {
+                    trueImageURL = imageURL
+                }
+                if let imageURL = results[0]["url_170x135"].string {
+                    trueImageURL = imageURL
+                }
+                
+                giveData(trueImageURL)
                 
             case .failure(let error):
-                print("Error: ", error, "\nin: ", currentImageRequestURL)
+                print("\n\nError: ", error.localizedDescription, "\nin: ", currentImageRequestURL, listingId)
+                for product in ProductsContainer.shared.foundProducts {
+                    if product.listingId == listingId {
+                        print("Error in url product: ", product.name)
+                    }
+                }
+                break
             }
         }
     }

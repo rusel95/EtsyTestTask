@@ -17,6 +17,8 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var downloadingLabel: UILabel!
     @IBOutlet weak var chooseLabel: UILabel!
+    @IBOutlet weak var downloadingActivityIndicator: UIActivityIndicatorView!
+   
     
     @IBAction func submitAction(_ sender: UIButton) {
         
@@ -27,7 +29,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             let searchData : (String, String) = (categoriesContainer[categoryPickerView.selectedRow(inComponent: 0)].0 , searchTextField.text!)
             self.performSegue(withIdentifier: "ShowSearchResults", sender: searchData)
         } else {
-            SingleTone.shared.createAlert(title: "OoOops", message: "Looks like you have`t entered any product name.. Please, do that!", currentView: self, controllerToDismiss: self.navigationController!)
+            HelperInstance.shared.createAlert(title: "OoOops", message: "Looks like you have`t entered any product name.. Please, do that!", currentView: self, controllerToDismiss: self.navigationController!)
         }
     }
     
@@ -48,9 +50,11 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     private func categoriesDownloading() {
+        
         self.categoryPickerView.isHidden = true
         self.submitButton.isHidden = true
         self.chooseLabel.isHidden = true
+        self.downloadingActivityIndicator.startAnimating()
         
         EtsyAPI.shared.getCategories { categories in
             self.categoriesContainer = categories
@@ -58,6 +62,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             self.submitButton.isHidden = false
             self.downloadingLabel.isHidden = true
             self.chooseLabel.isHidden = false
+            self.downloadingActivityIndicator.stopAnimating()
             self.categoryPickerView.reloadAllComponents()
         }
     }

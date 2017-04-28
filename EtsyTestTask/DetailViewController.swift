@@ -19,13 +19,13 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var addOutlet: UIButton!
     @IBAction func addButton(_ sender: UIButton) {
         DatabaseModel.shared.saveProduct(with: info)
-        SingleTone.shared.createAlert(title: "Adding", message: "Product added! Continue shopping... ", currentView: self, controllerToDismiss: navigationController!)
+        HelperInstance.shared.createAlert(title: "Adding", message: "Product added! Continue shopping... ", currentView: self, controllerToDismiss: navigationController!)
     }
     
     @IBOutlet weak var deleteOutlet: UIButton!
     @IBAction func deleteButton(_ sender: Any) {
         DatabaseModel.shared.deleteProduct(coreProduct: coreInfo)
-        SingleTone.shared.createAlert(title: "Deleting", message: "Product deleted! Continue shopping... ", currentView: self, controllerToDismiss: navigationController!)
+        HelperInstance.shared.createAlert(title: "Deleting", message: "Product deleted! Continue shopping... ", currentView: self, controllerToDismiss: navigationController!)
     }
     
     //need to find out who is controller`s parent

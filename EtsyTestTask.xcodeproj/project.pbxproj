@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8413951A1EAE56BF00DB9ED4 /* DatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841395191EAE56BF00DB9ED4 /* DatabaseModel.swift */; };
-		845AEB061EB10423004D1AEB /* SingleTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AEB051EB10423004D1AEB /* SingleTone.swift */; };
+		845AEB061EB10423004D1AEB /* helperInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845AEB051EB10423004D1AEB /* helperInstance.swift */; };
 		847188E01EA8C6810030F9A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847188DF1EA8C6810030F9A8 /* AppDelegate.swift */; };
 		847188E21EA8C6810030F9A8 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847188E11EA8C6810030F9A8 /* SearchViewController.swift */; };
 		847188E51EA8C6810030F9A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 847188E31EA8C6810030F9A8 /* Main.storyboard */; };
@@ -28,7 +28,7 @@
 		4AE73ADB2B397AE91304D66A /* Pods-EtsyTestTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EtsyTestTask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EtsyTestTask/Pods-EtsyTestTask.debug.xcconfig"; sourceTree = "<group>"; };
 		813D4F093EB2163C7E9C5C7F /* Pods_EtsyTestTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EtsyTestTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841395191EAE56BF00DB9ED4 /* DatabaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseModel.swift; sourceTree = "<group>"; };
-		845AEB051EB10423004D1AEB /* SingleTone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleTone.swift; sourceTree = "<group>"; };
+		845AEB051EB10423004D1AEB /* helperInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = helperInstance.swift; sourceTree = "<group>"; };
 		847188DC1EA8C6810030F9A8 /* EtsyTestTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EtsyTestTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		847188DF1EA8C6810030F9A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		847188E11EA8C6810030F9A8 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		8447F4971EAE66F10094D836 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				845AEB051EB10423004D1AEB /* SingleTone.swift */,
+				845AEB051EB10423004D1AEB /* helperInstance.swift */,
 				847188DF1EA8C6810030F9A8 /* AppDelegate.swift */,
 				847188EB1EA8C6810030F9A8 /* LaunchScreen.storyboard */,
 				847188EE1EA8C6810030F9A8 /* Info.plist */,
@@ -278,7 +278,7 @@
 				847188E81EA8C6810030F9A8 /* EtsyTestTask.xcdatamodeld in Sources */,
 				8413951A1EAE56BF00DB9ED4 /* DatabaseModel.swift in Sources */,
 				84E6DD621EACE59000964271 /* DetailViewController.swift in Sources */,
-				845AEB061EB10423004D1AEB /* SingleTone.swift in Sources */,
+				845AEB061EB10423004D1AEB /* helperInstance.swift in Sources */,
 				84E6DD661EACE8CF00964271 /* SearchResultsCollectionViewController.swift in Sources */,
 				847188E01EA8C6810030F9A8 /* AppDelegate.swift in Sources */,
 				84C3A25B1EA8FE6E004B1A62 /* EtsyModel.swift in Sources */,

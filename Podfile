@@ -8,7 +8,5 @@ target 'EtsyTestTask' do
   # Pods for EtsyTestTask
   pod 'Alamofire'
   pod 'AlamofireImage'
-  pod 'AlamofireNetworkActivityIndicator'
   pod 'SwiftyJSON'
-  pod 'DropDown'
 end

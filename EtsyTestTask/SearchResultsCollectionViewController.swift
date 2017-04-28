@@ -8,6 +8,7 @@
 
 import UIKit
 
+var isLoadingProducts = false
 
 class SearchResultsCollectionViewController: UICollectionViewController {
     
@@ -17,14 +18,20 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     
     var refreshControll: UIRefreshControl! = UIRefreshControl()
     
+    var isDataLoading : Bool = false
+    var currentPage : Int = 0
+    var limit : Int = 30
+    var offset : Int = 0 //pageNo*limit
+    var didEndReached : Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setFramesAndViews()
-
+        
         setRefreshControll()
         
-        refreshData()
+        self.refreshData()
     }
     
 }
@@ -39,7 +46,9 @@ extension SearchResultsCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let product = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.productCell, for: indexPath) as! ProductCollectionViewCell
         
-        product.info = ProductsContainer.shared.foundProducts[indexPath.item]
+        if ProductsContainer.shared.foundProducts.count != 0 {
+            product.info = ProductsContainer.shared.foundProducts[indexPath.item]
+        }
         
         return product
     }
@@ -52,6 +61,25 @@ extension SearchResultsCollectionViewController {
         if segue.identifier == Storyboard.showDetailSegue {
             let detailVC = segue.destination as! DetailViewController
             detailVC.info = sender as! Product
+        }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        //        print("scrollViewDidEndDragging")
+        //        print("\n collection content y: ", collectionView?.contentOffset.y ,
+        //              "\n collection frame height: ", collectionView?.frame.size.height,
+        //              "\n collection content heifht: ", collectionView?.contentSize.height,
+        //              "\n collection content heifht - constant: ", (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0)
+        
+        if ((collectionView?.contentOffset.y)! + (collectionView?.frame.size.height)! >= (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0) {
+            
+            if !isDataLoading{
+                self.currentPage = self.currentPage + 1
+                self.offset = self.limit * self.currentPage
+                downloadMoreData(category: dataForSearch.0, keywords: dataForSearch.1)
+                print("loadCallLogData(offset: ", offset, ",limit: ", limit)
+            }
         }
     }
 }
@@ -86,16 +114,37 @@ extension SearchResultsCollectionViewController {
     }
     
     func refreshData() {
-        ProductsContainer.shared.foundProducts.removeAll()
-        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1) {
-            self.refreshControll.endRefreshing()
-            self.collectionView?.reloadData()
-            self.searchActivityIndicator.stopAnimating()
-            self.searchActivityIndicator.isHidden = true
-            print(ProductsContainer.shared.foundProducts.count)
+        
+        ProductsContainer.shared.foundProducts.removeAll() //needed because every time whyle downloaing data appends
+        
+        self.offset = 0
+        
+        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1, limit: self.limit, offset: self.offset) {
+            
             if(ProductsContainer.shared.foundProducts.count == 0) {
-                SingleTone.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
+                HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
+            } else {
+                self.refreshControll.endRefreshing()
+                self.collectionView?.reloadData()
+                self.searchActivityIndicator.stopAnimating()
+                self.searchActivityIndicator.isHidden = true
             }
         }
+    }
+    
+    func downloadMoreData(category: String, keywords: String) {
+        
+        self.isDataLoading = true
+        EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) {
+            print(self.isDataLoading, self.limit, self.offset)
+            self.isDataLoading = false
+            
+            if(ProductsContainer.shared.foundProducts.count == 0) {
+                HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no more results for pagination...", currentView: self, controllerToDismiss: self.navigationController!)
+            } else {
+                self.collectionView?.reloadData()
+            }
+        }
+        
     }
 }
