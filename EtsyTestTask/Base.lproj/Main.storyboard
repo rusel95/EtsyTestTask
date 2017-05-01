@@ -37,7 +37,7 @@
         <scene sceneID="hjH-If-acH">
             <objects>
                 <collectionViewController id="BNP-yg-uai" customClass="BookmarksCollectionViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="oZs-Ma-Jdj">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="oZs-Ma-Jdj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -225,7 +225,7 @@
         <scene sceneID="YXC-tX-CVb">
             <objects>
                 <collectionViewController id="cH2-Bt-0AE" customClass="SearchResultsCollectionViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" misplaced="YES" indicatorStyle="black" dataMode="prototypes" id="HeN-Xx-jZy">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" indicatorStyle="black" dataMode="prototypes" id="HeN-Xx-jZy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.73333333329999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -397,6 +397,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="details" id="vo1-Ct-Zzd"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="addOutlet" destination="muy-9Y-s6V" id="38B-Yr-5h2"/>
                         <outlet property="deleteOutlet" destination="yjI-27-DDd" id="mWq-z7-gCg"/>

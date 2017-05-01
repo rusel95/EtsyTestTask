@@ -48,6 +48,7 @@ extension SearchResultsCollectionViewController {
         
         if ProductsContainer.shared.foundProducts.count != 0 {
             product.info = ProductsContainer.shared.foundProducts[indexPath.item]
+            print("\n\n\n try again to load: ", product.info.name, product.info.listingId)
         }
         
         return product
@@ -78,7 +79,7 @@ extension SearchResultsCollectionViewController {
                 self.currentPage = self.currentPage + 1
                 self.offset = self.limit * self.currentPage
                 downloadMoreData(category: dataForSearch.0, keywords: dataForSearch.1)
-                print("loadCallLogData(offset: ", offset, ",limit: ", limit)
+                print("loading more cells  with offset: ", offset, " and limit: ", limit)
             }
         }
     }
