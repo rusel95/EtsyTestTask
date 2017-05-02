@@ -120,15 +120,15 @@ extension SearchResultsCollectionViewController {
         
         self.offset = 0
         
-        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1, limit: self.limit, offset: self.offset) {
+        EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1, limit: self.limit, offset: self.offset) { [ unowned me = self ] in
             
             if(ProductsContainer.shared.foundProducts.count == 0) {
-                HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
+                HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: me, controllerToDismiss: me.navigationController!)
             } else {
-                self.refreshControll.endRefreshing()
-                self.collectionView?.reloadData()
-                self.searchActivityIndicator.stopAnimating()
-                self.searchActivityIndicator.isHidden = true
+                me.refreshControll.endRefreshing()
+                me.collectionView?.reloadData()
+                me.searchActivityIndicator.stopAnimating()
+                me.searchActivityIndicator.isHidden = true
             }
         }
     }
@@ -136,14 +136,14 @@ extension SearchResultsCollectionViewController {
     func downloadMoreData(category: String, keywords: String) {
         
         self.isDataLoading = true
-        EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) {
-            print(self.isDataLoading, self.limit, self.offset)
-            self.isDataLoading = false
+        EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) { [ unowned me = self ] in
+            //print("Start loading more data: ", me.isDataLoading, me.limit, me.offset)
+            me.isDataLoading = false
             
             if(ProductsContainer.shared.foundProducts.count == 0) {
-                HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no more results for pagination...", currentView: self, controllerToDismiss: self.navigationController!)
+                HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no more results for pagination...", currentView: me, controllerToDismiss: me.navigationController!)
             } else {
-                self.collectionView?.reloadData()
+                me.collectionView?.reloadData()
             }
         }
         
