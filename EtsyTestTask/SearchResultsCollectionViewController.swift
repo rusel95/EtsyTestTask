@@ -48,7 +48,6 @@ extension SearchResultsCollectionViewController {
         
         if ProductsContainer.shared.foundProducts.count != 0 {
             product.info = ProductsContainer.shared.foundProducts[indexPath.item]
-            print("\n\n\n try again to load: ", product.info.name, product.info.listingId)
         }
         
         return product
@@ -67,19 +66,11 @@ extension SearchResultsCollectionViewController {
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-        //        print("scrollViewDidEndDragging")
-        //        print("\n collection content y: ", collectionView?.contentOffset.y ,
-        //              "\n collection frame height: ", collectionView?.frame.size.height,
-        //              "\n collection content heifht: ", collectionView?.contentSize.height,
-        //              "\n collection content heifht - constant: ", (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0)
-        
         if ((collectionView?.contentOffset.y)! + (collectionView?.frame.size.height)! >= (collectionView?.contentSize.height)! - (collectionView?.frame.size.width)! / 2.0) {
-            
             if !isDataLoading{
                 self.currentPage = self.currentPage + 1
                 self.offset = self.limit * self.currentPage
                 downloadMoreData(category: dataForSearch.0, keywords: dataForSearch.1)
-                print("loading more cells  with offset: ", offset, " and limit: ", limit)
             }
         }
     }
@@ -138,7 +129,6 @@ extension SearchResultsCollectionViewController {
         
         self.isDataLoading = true
         EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) { [ unowned me = self ] in
-            //print("Start loading more data: ", me.isDataLoading, me.limit, me.offset)
             me.isDataLoading = false
             
             if(ProductsContainer.shared.foundProducts.count == 0) {
