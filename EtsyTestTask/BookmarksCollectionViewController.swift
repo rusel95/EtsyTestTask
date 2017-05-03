@@ -65,9 +65,10 @@ extension BookmarksCollectionViewController {
     func setFrames() {
         let collectionViewWidth = collectionView?.frame.width
         let itemWidth = collectionViewWidth! / Storyboard.numberOfItemsPerRow - Storyboard.leftAndRightPaddings
+        let itemHeight = itemWidth * ( HelperInstance.shared.defaulrImageSize.1 / HelperInstance.shared.defaulrImageSize.0)  //proper resolution
         
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
     }
     
     func reloadWithNewData() {

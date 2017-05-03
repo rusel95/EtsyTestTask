@@ -98,11 +98,13 @@ class EtsyAPI {
                             giveImage( realImage )
                         }
                     case .failure:
-                        for product in ProductsContainer.shared.foundProducts {
-                            if product.listingId == listingId {
-                                print("error in product: ", product.name)
-                            }
-                        }
+//                        for product in ProductsContainer.shared.foundProducts {
+//                            if product.listingId == listingId {
+//                                print("\nerror in product: ", product.name, realImageURL)
+//                            }
+//                        }
+                        let a = UIImage()
+                        giveImage (a)
                         break
                     }
                 }
@@ -137,13 +139,12 @@ class EtsyAPI {
                 giveData(trueImageURL)
                 
             case .failure(let error):
-                print("\n\nError: ", error.localizedDescription, "\nin: ", currentImageRequestURL, listingId)
+                print("\n\nError: ", error.localizedDescription, "\nin: ", currentImageRequestURL)
                 for product in ProductsContainer.shared.foundProducts {
                     if product.listingId == listingId {
-                        print("Error in url product: ", product.name)
+                        print("Error in url product: ", product.name, product.listingId)
                     }
                 }
-                break
             }
         }
     }
