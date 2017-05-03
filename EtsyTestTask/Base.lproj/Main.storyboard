@@ -299,7 +299,9 @@
                             <outlet property="delegate" destination="cH2-Bt-0AE" id="OLp-Vq-SOk"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="search results" id="M9e-kP-CyX"/>
+                    <navigationItem key="navigationItem" title="search results" prompt="1654" id="M9e-kP-CyX">
+                        <barButtonItem key="backBarButtonItem" title="46521" id="Nm1-ju-I3I"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchActivityIndicator" destination="1it-eP-bWA" id="2cz-dV-4PP"/>
                         <segue destination="CbF-Dn-gGl" kind="show" identifier="ShowSearchDetail" id="NmJ-SE-NIP"/>
@@ -322,20 +324,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-img" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5hI-kv-AR2">
-                                <rect key="frame" x="-3" y="64" width="326" height="255"/>
+                                <rect key="frame" x="-3" y="94" width="326" height="255"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5hI-kv-AR2" secondAttribute="height" multiplier="170:135" constant="5" id="7tW-O8-AKo"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHE-bw-nIY">
-                                <rect key="frame" x="16" y="327" width="288" height="132"/>
+                                <rect key="frame" x="16" y="357" width="288" height="102"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" red="0.57250362629999996" green="0.57257461549999999" blue="0.57247948650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBu-Sb-ANe">
-                                <rect key="frame" x="16" y="298" width="288" height="21"/>
+                                <rect key="frame" x="16" y="328" width="288" height="21"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="15"/>
                                 <color key="textColor" red="0.2784313725" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -373,7 +375,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUy-Bf-s3c">
-                                <rect key="frame" x="-3" y="64" width="326" height="22"/>
+                                <rect key="frame" x="-3" y="94" width="326" height="22"/>
                                 <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.45098039220000002" alpha="0.75364437849162014" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <color key="textColor" red="0.2784313725" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -405,7 +407,9 @@
                             <constraint firstItem="MBu-Sb-ANe" firstAttribute="bottom" secondItem="5hI-kv-AR2" secondAttribute="bottom" id="xyb-bh-mqY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="details" id="vo1-Ct-Zzd"/>
+                    <navigationItem key="navigationItem" title="details" prompt="1232" id="vo1-Ct-Zzd">
+                        <barButtonItem key="backBarButtonItem" title="12312" id="Mbz-IB-3DU"/>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
