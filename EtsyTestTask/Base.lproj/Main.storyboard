@@ -55,8 +55,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-img" translatesAutoresizingMaskIntoConstraints="NO" id="Zzs-EP-ccC">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-img" translatesAutoresizingMaskIntoConstraints="NO" id="Zzs-EP-ccC">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="materialDesign" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pin-D7-orc">
                                             <rect key="frame" x="0.0" y="182" width="200" height="18"/>
@@ -77,6 +80,9 @@
                                     <constraint firstAttribute="trailing" secondItem="Pin-D7-orc" secondAttribute="trailing" id="zzx-VE-vgR"/>
                                 </constraints>
                                 <size key="customSize" width="200" height="200"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="materialDesign" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="nameLabel" destination="Pin-D7-orc" id="STb-37-flI"/>
                                     <outlet property="photoImageView" destination="Zzs-EP-ccC" id="PDU-8U-vac"/>
@@ -241,14 +247,14 @@
                             <color key="color" red="0.2666666667" green="0.47450980390000003" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCollectionViewCell" id="eSa-c7-iAV" customClass="ProductCollectionViewCell" customModule="EtsyTestTask" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="ProductCollectionViewCell" id="eSa-c7-iAV" customClass="ProductCollectionViewCell" customModule="EtsyTestTask" customModuleProvider="target">
                                 <rect key="frame" x="60" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XR9-J4-mtq">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XR9-J4-mtq">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <color key="backgroundColor" red="1" green="1" blue="0.55912341099999996" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
@@ -278,6 +284,9 @@
                                     <constraint firstAttribute="trailing" secondItem="YLR-WS-lwn" secondAttribute="trailing" id="u0h-ao-nYt"/>
                                 </constraints>
                                 <size key="customSize" width="200" height="200"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="materialDesign" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="imageDownloadIndicator" destination="YAO-fR-kmf" id="Xdr-Ts-zu9"/>
                                     <outlet property="nameLabel" destination="YLR-WS-lwn" id="qKa-ss-aMm"/>
