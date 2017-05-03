@@ -11,6 +11,8 @@ import SystemConfiguration
 
 class HelperInstance {
     
+    let defaulrImageSize : (CGFloat,CGFloat) = (170, 135)
+    
     static let shared = HelperInstance()
     private init () { }
     
