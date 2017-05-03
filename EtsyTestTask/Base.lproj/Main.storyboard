@@ -95,7 +95,9 @@
                         </connections>
                     </collectionView>
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="TUp-6V-RcP"/>
-                    <navigationItem key="navigationItem" title="your bookmarks" id="4uU-3U-ZEl"/>
+                    <navigationItem key="navigationItem" title="your bookmarks" id="4uU-3U-ZEl">
+                        <barButtonItem key="backBarButtonItem" title="bookmarks" id="ZAo-At-ew1"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="CbF-Dn-gGl" kind="show" identifier="ShowBookmarksDetail" id="0Bg-bU-iG2"/>
                     </connections>
@@ -127,7 +129,7 @@
             </objects>
             <point key="canvasLocation" x="-684" y="-428"/>
         </scene>
-        <!--find some!-->
+        <!--Find some-->
         <scene sceneID="xRg-fj-26O">
             <objects>
                 <viewController id="UDU-VE-tt4" customClass="SearchViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -203,7 +205,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="xQJ-oA-rBM"/>
-                    <navigationItem key="navigationItem" title="find some!" id="ugK-Z4-1xz"/>
+                    <navigationItem key="navigationItem" title="Find some" id="ugK-Z4-1xz">
+                        <barButtonItem key="backBarButtonItem" title="find" id="ff2-Xd-fK6"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="categoryPickerView" destination="Uz3-Eg-8hf" id="tVI-EB-8MJ"/>
                         <outlet property="chooseLabel" destination="kFc-vp-bps" id="muZ-k0-h7s"/>
@@ -299,7 +303,9 @@
                             <outlet property="delegate" destination="cH2-Bt-0AE" id="OLp-Vq-SOk"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="search results" id="M9e-kP-CyX"/>
+                    <navigationItem key="navigationItem" title="search results" id="M9e-kP-CyX">
+                        <barButtonItem key="backBarButtonItem" title="results" id="Nm1-ju-I3I"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchActivityIndicator" destination="1it-eP-bWA" id="2cz-dV-4PP"/>
                         <segue destination="CbF-Dn-gGl" kind="show" identifier="ShowSearchDetail" id="NmJ-SE-NIP"/>
@@ -309,7 +315,7 @@
             </objects>
             <point key="canvasLocation" x="784" y="-430"/>
         </scene>
-        <!--details-->
+        <!--Details-->
         <scene sceneID="N5a-x1-l1r">
             <objects>
                 <viewController id="CbF-Dn-gGl" customClass="DetailViewController" customModule="EtsyTestTask" customModuleProvider="target" sceneMemberID="viewController">
@@ -405,7 +411,7 @@
                             <constraint firstItem="MBu-Sb-ANe" firstAttribute="bottom" secondItem="5hI-kv-AR2" secondAttribute="bottom" id="xyb-bh-mqY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="details" id="vo1-Ct-Zzd"/>
+                    <navigationItem key="navigationItem" title="Details" id="vo1-Ct-Zzd"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>

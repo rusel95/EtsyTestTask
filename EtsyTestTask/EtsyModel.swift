@@ -59,8 +59,6 @@ class EtsyAPI {
                     }
                     if let listingId = product.1["listing_id"].int {
                         tempProduct.listingId = String(listingId)
-                    } else {
-                        print("\n\nerror whyle getting listing_id from json\n\n")
                     }
                     if let price = product.1["price"].string {
                         tempProduct.price = price + " $"
@@ -91,18 +89,10 @@ class EtsyAPI {
                     switch response.result {
                     case .success:
                         if let realImage = response.result.value {
-                            // Add to Alamofire cache
                             ProductsContainer.shared.imageCache.add(realImage, withIdentifier: listingId)
-                            
-                            //Fetch From Alamofire cache and give data
                             giveImage( realImage )
                         }
                     case .failure:
-//                        for product in ProductsContainer.shared.foundProducts {
-//                            if product.listingId == listingId {
-//                                print("\nerror in product: ", product.name, realImageURL)
-//                            }
-//                        }
                         let a = UIImage()
                         giveImage (a)
                         break
@@ -125,13 +115,9 @@ class EtsyAPI {
                 let json = JSON(response.result.value!)
                 
                 let results = json["results"].array!
-                //print(results, currentImageRequestURL)
                 
                 var trueImageURL = String()
-                
-                if let imageURL = results[0]["url_75x75"].string {
-                    trueImageURL = imageURL
-                }
+         
                 if let imageURL = results[0]["url_170x135"].string {
                     trueImageURL = imageURL
                 }
@@ -139,12 +125,7 @@ class EtsyAPI {
                 giveData(trueImageURL)
                 
             case .failure(let error):
-                print("\n\nError: ", error.localizedDescription, "\nin: ", currentImageRequestURL)
-                for product in ProductsContainer.shared.foundProducts {
-                    if product.listingId == listingId {
-                        print("Error in url product: ", product.name, product.listingId)
-                    }
-                }
+                print(error.localizedDescription)
             }
         }
     }
