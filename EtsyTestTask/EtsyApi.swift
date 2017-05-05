@@ -40,16 +40,21 @@ class EtsyAPI {
         }
     }
     
-    func getProducts(inCategory: String, withKeywords: String, limit: Int, offset: Int, giveData: @escaping (Any) -> () ) -> Void {
+    func getProducts(inCategory: String, withKeywords: String, limit: Int, offset: Int, giveData: @escaping (Any?) -> () ) -> Void {
+        
         let neededURL = productsSearchRequestURL + apiKey + "&limit=" + String(limit) + "&offset=" + String(offset) + "&category=" + inCategory + "&keywords=" + withKeywords
         isLoadingProducts = true
+        
         Alamofire.request(neededURL).validate().responseJSON { response in
+            
             isLoadingProducts = false
+            
             switch response.result {
             case .success:
                 giveData(response.result.value!)
                 
             case .failure(let error):
+                giveData(nil)
                 print(error.localizedDescription)
             }
         }
