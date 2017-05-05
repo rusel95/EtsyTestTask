@@ -114,7 +114,7 @@ extension SearchResultsCollectionViewController {
         
         EtsyAPI.shared.getProducts(inCategory: dataForSearch.0, withKeywords: dataForSearch.1, limit: self.limit, offset: self.offset) { jsonAny in
             
-            ProductsContainer.shared.setProducts(jsonAny: jsonAny)
+            ProductsContainer.shared.setProducts(jsonAny: jsonAny!)
 
             if(ProductsContainer.shared.foundProducts.count == 0) {
                 HelperInstance.shared.createAlert(title: "Something went wrong...", message: "Loooks like there is no any results ", currentView: self, controllerToDismiss: self.navigationController!)
@@ -132,7 +132,7 @@ extension SearchResultsCollectionViewController {
         self.isDataLoading = true
         EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) { jsonAny in
             
-            ProductsContainer.shared.setProducts(jsonAny: jsonAny)
+            ProductsContainer.shared.setProducts(jsonAny: jsonAny!)
 
             self.isDataLoading = false
             
