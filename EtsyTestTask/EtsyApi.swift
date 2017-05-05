@@ -52,6 +52,7 @@ class EtsyAPI {
                 
                 for product in productList {
                     
+                    //need to be in Product
                     var tempProduct = Product()
                     
                     if let name = product.1["title"].string {
