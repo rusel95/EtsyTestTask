@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
     private func setView() {
         if info != nil {
             nameLabel.text = info.name
-            photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)
+            photoImageView.image = ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId!)
             priceLabel.text = info.price
             detailTextView.text = info.description
             if DatabaseModel.shared.ifProductInDatabase(newProduct: info) {

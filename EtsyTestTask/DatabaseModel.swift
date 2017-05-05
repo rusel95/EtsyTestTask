@@ -70,7 +70,7 @@ extension DatabaseModel {
             let product: CoreProduct = NSEntityDescription.insertNewObject(forEntityName: "CoreProduct", into: DatabaseModel.getContext()) as! CoreProduct
             
             product.name = info.name
-            if let image = UIImagePNGRepresentation( ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId)! )! as NSData! {
+            if let image = UIImagePNGRepresentation( ProductsContainer.shared.imageCache.image(withIdentifier: info.listingId!)! )! as NSData! {
                 product.image = image
             }
             product.price = info.price
