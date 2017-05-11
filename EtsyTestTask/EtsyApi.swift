@@ -40,43 +40,27 @@ class EtsyAPI {
         }
     }
     
-    func getProducts(inCategory: String, withKeywords: String, limit: Int, offset: Int, giveData: @escaping () -> () ) -> Void {
+    func getProducts(inCategory: String, withKeywords: String, limit: Int, offset: Int, giveData: @escaping (Any?) -> () ) -> Void {
+        
         let neededURL = productsSearchRequestURL + apiKey + "&limit=" + String(limit) + "&offset=" + String(offset) + "&category=" + inCategory + "&keywords=" + withKeywords
         isLoadingProducts = true
+        
         Alamofire.request(neededURL).validate().responseJSON { response in
+            
             isLoadingProducts = false
+            
             switch response.result {
             case .success:
-                let json = JSON(response.result.value!)
-                let productList = json["results"]
-                
-                for product in productList {
-                    
-                    var tempProduct = Product()
-                    
-                    if let name = product.1["title"].string {
-                        tempProduct.name = name
-                    }
-                    if let listingId = product.1["listing_id"].int {
-                        tempProduct.listingId = String(listingId)
-                    }
-                    if let price = product.1["price"].string {
-                        tempProduct.price = price + " $"
-                    }
-                    if let descriprion = product.1["description"].string {
-                        tempProduct.description = descriprion
-                    }
-                    ProductsContainer.shared.foundProducts.append(tempProduct)
-                }
-                giveData()
+                giveData(response.result.value!)
                 
             case .failure(let error):
+                giveData(nil)
                 print(error.localizedDescription)
             }
         }
     }
     
-    func getImage(listingId: String, giveImage: @escaping (UIImage) -> () ) -> Void {
+    func getImage(listingId: String, giveImage: @escaping (UIImage?) -> () ) -> Void {
         
         if let image = ProductsContainer.shared.imageCache.image(withIdentifier: listingId) {
             giveImage( image )
@@ -93,8 +77,7 @@ class EtsyAPI {
                             giveImage( realImage )
                         }
                     case .failure:
-                        let a = UIImage()
-                        giveImage (a)
+                        giveImage (nil)
                         break
                     }
                 }

@@ -19,14 +19,15 @@ class ProductCollectionViewCell: UICollectionViewCell {
     //MARK: Set cell with data
     var info: Product! {
         didSet {
-            nameLabel.text = info.name
             imageDownloadIndicator.startAnimating()
             imageDownloadIndicator.hidesWhenStopped = true
-            EtsyAPI.shared.getImage(listingId: info.listingId) { (image) in
+            
+            EtsyAPI.shared.getImage(listingId: info.listingId!) { (image) in
+                
                 self.photoImageView.image = image
+                self.nameLabel.text = self.info.name
                 self.imageDownloadIndicator.stopAnimating()
             }
-            
         }
     }
     
