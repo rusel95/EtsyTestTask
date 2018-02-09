@@ -45,6 +45,7 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         self.categoryPickerView.dataSource = self
         self.categoryPickerView.delegate = self
+        self.searchTextField.delegate = self
         
         categoriesDownloading()
     }
@@ -80,3 +81,10 @@ class SearchViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
 }
 
+extension SearchViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.submitAction(UIButton())
+        return false
+    }
+}
