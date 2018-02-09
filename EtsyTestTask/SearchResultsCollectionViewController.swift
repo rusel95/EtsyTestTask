@@ -16,13 +16,13 @@ class SearchResultsCollectionViewController: UICollectionViewController {
     
     var dataForSearch : (String, String) = ("","")
     
-    var refreshControll: UIRefreshControl! = UIRefreshControl()
+    @objc var refreshControll: UIRefreshControl! = UIRefreshControl()
     
-    var isDataLoading : Bool = false
-    var currentPage : Int = 0
-    var limit : Int = 30
-    var offset : Int = 0 //pageNo*limit
-    var didEndReached : Bool = false
+    @objc var isDataLoading : Bool = false
+    @objc var currentPage : Int = 0
+    @objc var limit : Int = 30
+    @objc var offset : Int = 0 //pageNo*limit
+    @objc var didEndReached : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +87,7 @@ extension SearchResultsCollectionViewController {
         static let numberOfItemsPerRow : CGFloat = 3.0
     }
     
-    func setFramesAndViews() {
+    @objc func setFramesAndViews() {
         let collectionViewWidth = collectionView?.frame.width
         let itemWidth = collectionViewWidth! / Storyboard.numberOfItemsPerRow - Storyboard.leftAndRightPaddings
         let itemHeight = itemWidth * ( HelperInstance.shared.defaulrImageSize.1 / HelperInstance.shared.defaulrImageSize.0)  //proper resolution
@@ -99,14 +99,14 @@ extension SearchResultsCollectionViewController {
         searchActivityIndicator.startAnimating()
     }
     
-    func setRefreshControll(){
+    @objc func setRefreshControll(){
         refreshControll.addTarget(self, action: #selector(SearchResultsCollectionViewController.refreshData), for: UIControlEvents.valueChanged)
         refreshControll.tintColor = UIColor.blue
-        refreshControll.attributedTitle = NSAttributedString(string: "refreshing...", attributes: [NSForegroundColorAttributeName: refreshControll.tintColor])
+        refreshControll.attributedTitle = NSAttributedString(string: "refreshing...", attributes: [NSAttributedStringKey.foregroundColor: refreshControll.tintColor])
         collectionView?.refreshControl = refreshControll
     }
     
-    func refreshData() {
+    @objc func refreshData() {
         
         ProductsContainer.shared.foundProducts.removeAll() //needed because every time whyle downloaing data appends
         
@@ -127,7 +127,7 @@ extension SearchResultsCollectionViewController {
         }
     }
     
-    func downloadMoreData(category: String, keywords: String) {
+    @objc func downloadMoreData(category: String, keywords: String) {
         
         self.isDataLoading = true
         EtsyAPI.shared.getProducts(inCategory: category, withKeywords: keywords, limit: self.limit, offset: self.offset) { jsonAny in

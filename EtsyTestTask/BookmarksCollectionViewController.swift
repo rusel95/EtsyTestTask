@@ -11,7 +11,7 @@ import CoreData
 
 class BookmarksCollectionViewController: UICollectionViewController {
     
-    var controller: NSFetchedResultsController<CoreProduct>!
+    @objc var controller: NSFetchedResultsController<CoreProduct>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +62,7 @@ extension BookmarksCollectionViewController {
         static let numberOfItemsPerRow : CGFloat = 3.0
     }
     
-    func setFrames() {
+    @objc func setFrames() {
         let collectionViewWidth = collectionView?.frame.width
         let itemWidth = collectionViewWidth! / Storyboard.numberOfItemsPerRow - Storyboard.leftAndRightPaddings
         let itemHeight = itemWidth * ( HelperInstance.shared.defaulrImageSize.1 / HelperInstance.shared.defaulrImageSize.0)  //proper resolution
@@ -71,7 +71,7 @@ extension BookmarksCollectionViewController {
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
     }
     
-    func reloadWithNewData() {
+    @objc func reloadWithNewData() {
         ProductsContainer.shared.databaseProducts = DatabaseModel.shared.getCoreProducts()
         self.collectionView?.reloadData()
     }
